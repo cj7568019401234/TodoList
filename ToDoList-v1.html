@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang='zh'>
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta http-equiv='X-UA-Compatible' content='ie=edge'> 
         <title>ToDoList</title>
-        <link rel="stylesheet" href="./css/ToDoList-v1.css">
+        <link rel='stylesheet' href='./css/ToDoList-v1.css'>
     </head>
 
     <body>
-        <div class="container">
-            <nav class="my-nav">
-                <div class="nav-title">
-                    <label for="">ToDoList</label>
-                    <input type="text" placeholder="添加任务">
-                    <input type="button" value="添加">
+        <div class='container'>
+        
+            <nav class='my-nav'>
+                <div class='nav-div'>
+                    <label class='logo'>ToDoList</label>
+                    <input type='text' class='input-task' placeholder='添加任务'>
+                    <div class='add-task' id='add-btn'>添加</div>
                 </div>
             </nav>
         </div>
 
+        <div class='main-div'>
+            <div class='task'>
+                <h3 class='type-title'>待完成
+                    <span class='task-num on-task-num'>0</span>
+                </h3>
+                <div class='line'></div>
+                <div class='on-list'></div>
+            </div>
+            
+            <div class='end-task task'>
+                <h3 class='type-title'>已完成
+                    <span class='task-num end-task-num'>0</span>
+                </h3>
+                <div class='end-line line'></div>
+                <div class='end-list'></div>
+   
+            </div>
+        </div>
+
+    <script src='./js/ToDoList-v1.js'></script>
     </body>
 </html>

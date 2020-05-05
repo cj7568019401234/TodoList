@@ -1,25 +1,172 @@
+/* 以下是全局样式 */
 *{
     margin:0;
     padding:0;
+    font-size: 14px;
+    font-family: Arial,Helvetica,sans-serif;
+    border-radius: 5px;
 }
 html,body{
     width:100%;
     height:100%
 }
-.my-nav{
-    width:100%;
-    height:80px;
-    background-color:#363636;
-    
-}
-.nav-title{
-    width:1200px;
-    width:80px;
-    top:50%;
-    left:50%;
-    margin:40px auto;
-}
-label{
+div::selection,
+span::selection {
+    background-color:none;
     color:white;
-    font-size: 1.5em;
+}
+div::-moz-selection,
+span::-moz-selection {
+    background-color:none;
+    color: white;
+}
+div::-webkit-selection,
+span::-webkit-selection {
+    background-color:none;
+    color: white
+}
+
+/* 以下是导航栏样式 */
+.nav-div{
+    position: relative;
+    width:50%;
+    margin: 0 auto;
+}
+.my-nav{
+    height:70px;
+    background-color:#363636;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width:1%;/*table-cell里的width:3.5%，故意设置很小，目的是让table-cell占总容器100%宽*/
+}
+.logo{
+    color:pink;
+    font: bold 28px/1 sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+}
+.logo::before {
+    content: "❤ ";
+}
+.add-task{
+    position: absolute;
+    top:50%;
+    right: -42px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 5px;
+    color:white;
+    background-color:#FF8C00;
+    box-shadow: 2px 2px 5px #888;
+    transform: translate(-100%,-50%);
+}
+.add-task:hover{
+    cursor: pointer; 
+    background-color:#FFA500;
+ }
+.add-task:active{
+    transform: translate(-99%,-49%);
+}
+.input-task{
+    width: 350px;
+    padding:5px;
+    margin:5px;
+    margin-left: 20%;
+    margin-right: 45px;
+}
+
+
+/* 以下是主体内容样式 */
+.main-div{
+    width:50%;
+    margin: 0 auto;
+}
+.task{
+    padding: 20px 30px;
+    margin-top: 20px;
+    background-color:#FAEBD7;
+}
+.on-task{
+    background-color:#FAEBD7;
+}
+.end-task{
+    background-color:#A9A9A9;
+}
+.task-num{
+    float:right;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 100%;
+    color:white;
+}
+.on-task-num{
+    background-color:#FF8C00;
+    box-shadow: 2px 2px 5px #888;
+}
+.end-task-num{
+    background-color: #696969;
+    box-shadow: 2px 2px 5px #111;
+}
+.line{
+    width: 100%;
+    height: 1px;
+    margin-top: 20px;
+    background-color: #C0C0C0; 
+    /* transform: scaleY(0.5); */
+}
+.new-line{
+    width: 100%;
+    height: 1px;
+    background-color: #C0C0C0; 
+    /* transform: scaleY(0.5); */
+}
+.del-button{
+    position: absolute;
+    top:50%;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    color:white;
+    background-color:#FF8C00;
+    box-shadow: 2px 2px 5px #888;
+    transform: translateY(-50%);
+}
+.del-button:hover{
+   cursor: pointer; 
+   background-color:#FFA500;
+}
+.del-button:active{
+    transform: translate(1%,-49%);
+}
+.end-task .del-button{
+    background-color: #696969;
+    box-shadow: 2px 2px 5px #111;
+}
+.new-task{
+    position:relative;
+} 
+.check{
+    width: 16px;
+    height: 16px;
+    margin: 15px 8px 15px 0;
+    vertical-align:middle;
+}
+.task-text{
+    vertical-align:middle;
+    line-height: 20px;
 }
