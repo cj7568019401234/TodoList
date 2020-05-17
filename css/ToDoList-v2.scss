@@ -8,7 +8,6 @@ $grey-active-button-color:#808080;
     padding: 0;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
-    border-radius: 5px;
 }
 html,
 body {
@@ -18,64 +17,76 @@ body {
 
 /* 全局样式结束 */
 /* 以下是导航栏样式 */
-.nav-div {
-    height: 70px;
-    background-color: #363636;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-}
-.nav-div::before {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-}
-.logo {
-    color: pink;
-    font: bold 28px/1 sans-serif;
-    display: inline-block;
-    vertical-align: middle;
-}
-.logo::before {
-    content: "❤ ";
-}
-.add-task {
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 5px;
-    color: white;
-    background-color: $bright-button-color;
-    box-shadow: 2px 2px 5px #888;
-}
-.add-task:hover {
-    cursor: pointer;
-    background-color: $bright-active-button-color;
-}
+.nav{
+    &__body {
+        height: 70px;
+        background-color: #363636;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
 
-/*点击下沉效果*/
-.add-task:active {
-    transform: translate(1%, 1%);
-}
-.input-task {
-    width: 350px;
-    height: 20px;
-    padding: 5px;
-    margin: 5px;
-    margin-left: 10%;
-    margin-right: 20px;
+        &::before {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        &--logo {
+            color: pink;
+            font: bold 28px/1 sans-serif;
+            display: inline-block;
+            vertical-align: middle;
+
+            &::before {
+                content: "❤ ";
+            }
+        }
+
+        &--task {
+            width: 350px;
+            height: 20px;
+            padding: 5px;
+            margin: 5px;
+            margin-left: 10%;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        &--add {
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 5px;
+            color: white;
+            background-color: $bright-button-color;
+            box-shadow: 2px 2px 5px #888;
+        
+            &:hover {
+                cursor: pointer;
+                background-color: $bright-active-button-color;
+            }
+        
+            &:active {/*点击下沉效果*/
+                transform: translate(1%, 1%);
+            }
+        }
+    }
+
 }
 
 /* 导航栏样式结束 */
 /* 以下是主体内容样式 */
-.main-div {
-    width: 50%;
-    margin: 0 auto;
+.main{
+    &__body {
+        width: 50%;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
 }
 .task {
     padding: 20px 30px;

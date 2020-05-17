@@ -5,7 +5,6 @@
   padding: 0;
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
-  border-radius: 5px;
 }
 
 html,
@@ -16,33 +15,38 @@ body {
 
 /* 全局样式结束 */
 /* 以下是导航栏样式 */
-.nav-div {
+.nav__body {
   height: 70px;
   background-color: #363636;
   text-align: center;
   vertical-align: middle;
   width: 100%;
 }
-
-.nav-div::before {
+.nav__body::before {
   content: "";
   display: inline-block;
   vertical-align: middle;
   height: 100%;
 }
-
-.logo {
+.nav__body--logo {
   color: pink;
   font: bold 28px/1 sans-serif;
   display: inline-block;
   vertical-align: middle;
 }
-
-.logo::before {
+.nav__body--logo::before {
   content: "❤ ";
 }
-
-.add-task {
+.nav__body--task {
+  width: 350px;
+  height: 20px;
+  padding: 5px;
+  margin: 5px;
+  margin-left: 10%;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+.nav__body--add {
   display: inline-block;
   height: 30px;
   line-height: 30px;
@@ -55,31 +59,21 @@ body {
   background-color: #ff8c00;
   box-shadow: 2px 2px 5px #888;
 }
-
-.add-task:hover {
+.nav__body--add:hover {
   cursor: pointer;
   background-color: #ffa500;
 }
-
-/*点击下沉效果*/
-.add-task:active {
+.nav__body--add:active {
+  /*点击下沉效果*/
   transform: translate(1%, 1%);
-}
-
-.input-task {
-  width: 350px;
-  height: 20px;
-  padding: 5px;
-  margin: 5px;
-  margin-left: 10%;
-  margin-right: 20px;
 }
 
 /* 导航栏样式结束 */
 /* 以下是主体内容样式 */
-.main-div {
+.main__body {
   width: 50%;
   margin: 0 auto;
+  border-radius: 5px;
 }
 
 .task {

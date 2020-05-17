@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang='zh'>
 
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <meta http-equiv='X-UA-Compatible' content='ie=edge'> 
-        <title>ToDoList</title>
-        <link rel='stylesheet' href='./css/ToDoList-v2.css'>
-    </head>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>ToDoList</title>
+    <link rel='stylesheet' href='./css/ToDoList-v2.css'>
+</head>
 
-    <body>
-        <div class='container'>
-            <nav class='nav-div'>
-                <!-- <div class='nav-div'> -->
-                    <label class='logo'>ToDoList</label>
-                    <input type='text' class='input-task' placeholder='添加任务'>
-                    <div class='add-task' id='add-btn'>添加</div>
-                <!-- </div> -->
-            </nav>
-        </div>
+<body>
+    <div class='nav'>
+        <nav class='nav__body'>
+            <label class='nav__body--logo'>ToDoList</label>
+            <input class='nav__body--task' type='text' placeholder='添加任务'>
+            <div class='nav__body--add' id='add-btn'>添加</div>
+        </nav>
+    </div>
 
-        <div class='main-div'>
+    <div class="main">
+        <div class='main__body'>
             <div class='on-task task'>
                 <h3 class='type-title'>待完成
                     <span class='task-num on-task-num'>0</span>
@@ -28,7 +27,7 @@
                 <div class='line'></div>
                 <div class='on-list'></div>
             </div>
-            
+
             <div class='end-task task'>
                 <h3 class='type-title'>已完成
                     <span class='task-num end-task-num'>0</span>
@@ -37,11 +36,13 @@
                 <div class='end-list'></div>
             </div>
         </div>
+    </div>
 
-        <footer>
-            <p>Copyright © 2020 ToDoList-v2. Posted by : Cj</p>
-        </footer>
+    <footer>
+        <p>Copyright © 2020 ToDoList-v2. Posted by : Cj</p>
+    </footer>
 
     <script src='./js/ToDoList-v2.js'></script>
-    </body>
+</body>
+
 </html>
