@@ -13,31 +13,30 @@ body {
   height: 100%;
 }
 
-/* 全局样式结束 */
 /* 以下是导航栏样式 */
-.nav__body {
+.nav {
   height: 70px;
   background-color: #363636;
   text-align: center;
   vertical-align: middle;
   width: 100%;
 }
-.nav__body::before {
+.nav::before {
   content: "";
   display: inline-block;
   vertical-align: middle;
   height: 100%;
 }
-.nav__body--logo {
+.nav__logo {
   color: pink;
   font: bold 28px/1 sans-serif;
   display: inline-block;
   vertical-align: middle;
 }
-.nav__body--logo::before {
+.nav__logo::before {
   content: "❤ ";
 }
-.nav__body--task {
+.nav__task {
   width: 350px;
   height: 20px;
   padding: 5px;
@@ -46,7 +45,7 @@ body {
   margin-right: 20px;
   border-radius: 5px;
 }
-.nav__body--add {
+.nav__add {
   display: inline-block;
   height: 30px;
   line-height: 30px;
@@ -59,37 +58,18 @@ body {
   background-color: #ff8c00;
   box-shadow: 2px 2px 5px #888;
 }
-.nav__body--add:hover {
+.nav__add:hover {
   cursor: pointer;
   background-color: #ffa500;
 }
-.nav__body--add:active {
-  /*点击下沉效果*/
+.nav__add:active {
   transform: translate(1%, 1%);
+  /*点击下沉效果*/
 }
 
 /* 导航栏样式结束 */
 /* 以下是主体内容样式 */
-.main__body {
-  width: 50%;
-  margin: 0 auto;
-  border-radius: 5px;
-}
-
-.task {
-  padding: 20px 30px;
-  margin-top: 20px;
-}
-
-.on-task {
-  background-color: #faebd7;
-}
-
-.end-task {
-  background-color: #a9a9a9;
-}
-
-.task-num {
+.Btn--num, .task--done__num, .task--todo__num {
   float: right;
   width: 26px;
   height: 26px;
@@ -101,32 +81,7 @@ body {
   color: white;
 }
 
-.on-task-num {
-  background-color: #ff8c00;
-  box-shadow: 2px 2px 5px #888;
-}
-
-.end-task-num {
-  background-color: #696969;
-  box-shadow: 2px 2px 5px #111;
-}
-
-.line {
-  width: 100%;
-  height: 1px;
-  margin-top: 20px;
-  background-color: #c0c0c0;
-  /* transform: scaleY(0.5); */
-}
-
-.new-line {
-  width: 100%;
-  height: 1px;
-  background-color: #c0c0c0;
-  /* transform: scaleY(0.5); */
-}
-
-.del-button {
+.Btn--del, .task--done .task__delBtn, .task--todo .task__delBtn {
   position: absolute;
   top: 50%;
   right: 0;
@@ -138,50 +93,76 @@ body {
   font-weight: bold;
   border-radius: 50%;
   color: white;
-  background-color: #ff8c00;
-  box-shadow: 2px 2px 5px #888;
   transform: translateY(-50%);
 }
-
-.del-button:hover {
-  cursor: pointer;
-  background-color: #ffa500;
-}
-
-.del-button:active {
+.Btn--del:active, .task--done .task__delBtn:active, .task--todo .task__delBtn:active {
   transform: translate(1%, -49%);
 }
 
-.end-task .del-button {
-  background-color: #696969;
-  box-shadow: 2px 2px 5px #111;
+.task {
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
 }
-.end-task .del-button:hover {
-  cursor: pointer;
-  background-color: #808080;
-}
-.end-task .del-button:active {
-  transform: translate(1%, -49%);
-}
-
-/* 新任务样式 */
-.new-task {
+.task__div {
   position: relative;
 }
-
-.check {
+.task__check {
   width: 16px;
   height: 16px;
   margin: 15px 8px 15px 0;
   vertical-align: middle;
 }
-
-.task-text {
+.task__task {
   vertical-align: middle;
   line-height: 20px;
 }
+.task__line--first {
+  width: 100%;
+  height: 1px;
+  margin-top: 20px;
+  background-color: #c0c0c0;
+}
+.task__line--other {
+  width: 100%;
+  height: 1px;
+  background-color: #c0c0c0;
+}
+.task--todo {
+  padding: 20px 30px;
+  margin-top: 20px;
+  background-color: #faebd7;
+}
+.task--todo__num {
+  background-color: #ff8c00;
+  box-shadow: 2px 2px 5px #888;
+}
+.task--todo .task__delBtn {
+  background-color: #ff8c00;
+  box-shadow: 2px 2px 5px #888;
+}
+.task--todo .task__delBtn:hover {
+  cursor: pointer;
+  background-color: #ffa500;
+}
+.task--done {
+  padding: 20px 30px;
+  margin-top: 20px;
+  background-color: #a9a9a9;
+}
+.task--done__num {
+  background-color: #696969;
+  box-shadow: 2px 2px 5px #111;
+}
+.task--done .task__delBtn {
+  background-color: #696969;
+  box-shadow: 2px 2px 5px #111;
+}
+.task--done .task__delBtn:hover {
+  cursor: pointer;
+  background-color: #808080;
+}
 
-/* 新任务样式已结束 */
 /* 以下是footer样式 */
 footer p {
   margin-top: 20px;
