@@ -67,7 +67,6 @@ body {
   /*点击下沉效果*/
 }
 
-/* 导航栏样式结束 */
 /* 以下是主体内容样式 */
 .Btn--num, .task--done__num, .task--todo__num {
   float: right;
@@ -102,7 +101,6 @@ body {
 .task {
   width: 50%;
   margin: 0 auto;
-  border-radius: 5px;
 }
 .task__div {
   position: relative;
@@ -132,6 +130,7 @@ body {
   padding: 20px 30px;
   margin-top: 20px;
   background-color: #faebd7;
+  border-radius: 5px;
 }
 .task--todo__num {
   background-color: #ff8c00;
@@ -149,6 +148,7 @@ body {
   padding: 20px 30px;
   margin-top: 20px;
   background-color: #a9a9a9;
+  border-radius: 5px;
 }
 .task--done__num {
   background-color: #696969;
