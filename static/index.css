@@ -10,25 +10,6 @@ html,body{
     width:100%;
     height:100%
 }
-/* *::selection {
-    background-color:none;
-}
-*::-moz-selection {
-    background-color:none;
-}
-*::-webkit-selection {
-    background-color:none;
-}  */
-/* input框的文案选中可见 */
-/* input::selection {
-    background-color:#1E90FF;
-}
-input::-moz-selection {
-    background-color:#1E90FF;
-}
-input::-webkit-selection {
-    background-color:#1E90FF;
-} */
 
 /* 全局样式结束 */
 /* 以下是导航栏样式 */
