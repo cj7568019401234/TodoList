@@ -9,49 +9,51 @@ import './index.css';
  * @param {props.taskList}  任务列表
  */
 function Task(props) {
+    const { checkType,checked,btnType,taskList = [], onCheck } = props
     return (
-        props.taskList.map(function (task,index) {
-             return <div className="task__div" key={index+props.checkType}>
-                <input type="checkbox" className="task__check" data-type={props.checkType} checked={props.checked} />
+        taskList.map((task,index) => {
+             return <div className="task__div wrap box container" key={`${index}${checkType}`}>
+                <input type="checkbox" className="task__check" onChange={onCheck.bind('input')} checked={checked} />
                 <label className="task__text">{task}</label>
-                <div className="task__delBtn" data-type={props.btnType}>DEL</div>
-                <div className="task__line--other"></div>
+                <div className="task__del-btn" data-type={props.btnType} onClick={onCheck.bind(btnType)}>DEL</div>
+                <div className="task__line task__line--other"></div>
             </div>
         })
     );
 }
 
 class TaskList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.inputText = React.createRef();
-        this.taskText = React.createRef();
-        this.state = {
-            todoList: [],
-            doneList: []
-        }
-        this.addTask = this.addTask.bind(this);
-        this.alterTask = this.alterTask.bind(this);
+    state = {
+        value: '',
+        todoList: [],
+        doneList: []
+    }
+
+    handleInput = (e) => {
+        this.setState({
+            value: e.target.value
+        })
     }
 
     /**
      * 添加新任务
      */
-    addTask() {
-        const text = this.inputText.current.value;
-        if(!text.trim()) return; //不允许添加空白任务
+    addTask = () => {
+        const { value, todoList } = this.state
+        if(!value.trim()) return; //不允许添加空白任务
 
-        this.inputText.current.value = ''; //添加任务后清除输入框
         this.setState({
-            todoList: this.state.todoList.concat(text)  
+            value: '',
+            todoList: [...todoList, value] 
         });
     };
 
     /**
      * 勾选任务状态或删除任务
+        const text = this.inputText
      * @param {event}  发生点击事件的Event对象
      */
-    alterTask(event) {
+    alterTask = (event) => {
         if (!event.target.dataset.type) return;
         const parent = event.target.parentNode;
         const text = parent.getElementsByClassName("task__text")[0].innerText;
@@ -84,19 +86,19 @@ class TaskList extends React.Component {
     };
 
     render() {
-        const { todoList, doneList } = this.state;
+        const { value, todoList, doneList } = this.state;
 
         return (
             <div>
                 <nav className='nav'>
                     <label className='nav__logo'>ToDoList</label>
-                    <input className='nav__task' type='text' placeholder='添加任务' ref={this.inputText} />
+                    <input className='nav__task' value={value} onChange={this.handleInput} type='text' placeholder='添加任务' />
                     <div className='nav__add' onClick={() => this.addTask()}>添加</div>
                 </nav>
                 <div className='task' onClick={this.alterTask}>
-                    <div className='task--todo'>
+                    <div className='task task--todo'>
                         <h3>待完成
-                            <span className='task--todo__num'>{todoList.length}</span>
+                            <span className='task__num'>{todoList.length}</span>
                         </h3>
                         <div className='task__line--first'></div>
                         <div className='task--todo__list'>
@@ -104,13 +106,14 @@ class TaskList extends React.Component {
                                 checkType='todo'
                                 btnType='del-todo'
                                 checked=''
+                                onCheck={this.alterTask}
                                 taskList={todoList}
                             />
                         </div>
                     </div>
-                    <div className='task--done'>
+                    <div className='task task--done'>
                         <h3>已完成
-                <span className='task--done__num'>{doneList.length}</span>
+                            <span className='task__num'>{doneList.length}</span>
                         </h3>
                         <div className='task__line--first'></div>
                         <div className='task--done__list'>
