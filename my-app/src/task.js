@@ -7,8 +7,9 @@ class Task extends React.Component {
         this.inputText = React.createRef();
 
         this.state = {
-            todoList: ['hahhaha', 'hahhaha2'],
-            doneList: ['hhhhh'],
+            todoList: [],
+            doneList: [],
+            text : 2
             // inputText : React.createRef()
         }
         this.addTask = this.addTask.bind(this);
@@ -17,30 +18,13 @@ class Task extends React.Component {
 
     addTask() {
         const text = this.inputText.current.value;
-        let oldList = this.state.todoList;
+        const oldList =  this.state.todoList.push(text);
 
-        // console.log(text);
-        console.log('addTask',this.state.todoList);
-
+        console.log('addTask',oldList);
 
         this.setState({
-            todoList: oldList.push(text)
+            // todoList: text
         });
-
-        // console.log( this.inputText.current.value);
-
-        // const todoList = [];
-        // // this.setState({squares: squares});
-
-        // const onTaskNum = document.querySelector('.task--todo__num');// 待完成的任务数量
-        // // const todoList = document.querySelector('.task--todo__list');// 待完成的任务列表
-        // const inputText = document.querySelector('.nav__task').value.trim();// 去除任务前后的空格
-        // if (!inputText.length) return;
-
-        // const childNode = ``;
-
-        // todoList.innerHTML += childNode;
-        // onTaskNum.innerText = parseInt(onTaskNum.innerText, 10) + 1;// 添加任务的时候，待完成任务数+1
     };
 
 
