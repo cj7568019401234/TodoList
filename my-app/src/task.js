@@ -18,12 +18,8 @@ class Task extends React.Component {
 
     addTask() {
         const text = this.inputText.current.value;
-        const oldList =  this.state.todoList.push(text);
-
-        console.log('addTask',oldList);
-
         this.setState({
-            // todoList: text
+            todoList: this.state.todoList.concat(text)
         });
     };
 
