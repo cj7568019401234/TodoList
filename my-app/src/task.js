@@ -4,25 +4,43 @@ import './index.css';
 class Task extends React.Component {
     constructor(props) {
         super(props);
+        this.inputText = React.createRef();
+
+        this.state = {
+            todoList: ['hahhaha', 'hahhaha2'],
+            doneList: ['hhhhh'],
+            // inputText : React.createRef()
+        }
         this.addTask = this.addTask.bind(this);
         this.alterTask = this.alterTask.bind(this);
     }
 
     addTask() {
-        const onTaskNum = document.querySelector('.task--todo__num');// 待完成的任务数量
-        const todoList = document.querySelector('.task--todo__list');// 待完成的任务列表
-        const inputText = document.querySelector('.nav__task').value.trim();// 去除任务前后的空格
-        if (!inputText.length) return;
+        const text = this.inputText.current.value;
+        let oldList = this.state.todoList;
 
-        const childNode = `<div class="task__div" data-type="todo">
-            <input type="checkbox" class="task__check">
-            <label class="task__text">${inputText}</label>
-            <div class="task__delBtn">DEL</div>
-            <div class="task__line--other"></div>
-            </div>`;
+        // console.log(text);
+        console.log('addTask',this.state.todoList);
 
-        todoList.innerHTML += childNode;
-        onTaskNum.innerText = parseInt(onTaskNum.innerText, 10) + 1;// 添加任务的时候，待完成任务数+1
+
+        this.setState({
+            todoList: oldList.push(text)
+        });
+
+        // console.log( this.inputText.current.value);
+
+        // const todoList = [];
+        // // this.setState({squares: squares});
+
+        // const onTaskNum = document.querySelector('.task--todo__num');// 待完成的任务数量
+        // // const todoList = document.querySelector('.task--todo__list');// 待完成的任务列表
+        // const inputText = document.querySelector('.nav__task').value.trim();// 去除任务前后的空格
+        // if (!inputText.length) return;
+
+        // const childNode = ``;
+
+        // todoList.innerHTML += childNode;
+        // onTaskNum.innerText = parseInt(onTaskNum.innerText, 10) + 1;// 添加任务的时候，待完成任务数+1
     };
 
 
@@ -60,20 +78,34 @@ class Task extends React.Component {
     };
 
     render() {
+        console.log('render',this.state.todoList);
+        var taskList = this.state.todoList;
+
         return (
             <div>
                 <nav className='nav'>
                     <label className='nav__logo'>ToDoList</label>
-                    <input className='nav__task' type='text' placeholder='添加任务'></input>
-                    <div className='nav__add' onClick={this.addTask} >添加</div>
+                    <input className='nav__task' type='text' placeholder='添加任务' ref={this.inputText} />
+                    <div className='nav__add' onClick={() => this.addTask()}>添加</div>
                 </nav>
-                <div className='task' onClick={this.alterTask}>
+                <div className='task' onClick={() => this.alterTask()}>
                     <div className='task--todo'>
                         <h3>待完成
                 <span className='task--todo__num'>0</span>
                         </h3>
                         <div className='task__line--first'></div>
-                        <div className='task--todo__list'></div>
+                        <div className='task--todo__list'>
+                            {
+                                taskList.map(function (task) {
+                                    return <div className="task__div" data-type="todo">
+                                        <input type="checkbox" className="task__check" />
+                                        <label className="task__text">{task}</label>
+                                        <div className="task__delBtn">DEL</div>
+                                        <div className="task__line--other"></div>
+                                    </div>
+                                })
+                            }
+                        </div>
                     </div>
                     <div className='task--done'>
                         <h3>已完成
