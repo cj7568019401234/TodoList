@@ -12,11 +12,11 @@ function Task(props) {
     const { checkType,checked,btnType,taskList = [], onCheck } = props
     return (
         taskList.map((task,index) => {
-             return <div className="task__div wrap box container" key={`${index}${checkType}`}>
-                <input type="checkbox" className="task__check" onChange={onCheck.bind('input')} checked={checked} />
-                <label className="task__text">{task}</label>
-                <div className="task__del-btn" data-type={props.btnType} onClick={onCheck.bind(btnType)}>DEL</div>
-                <div className="task__line task__line--other"></div>
+             return <div className="item-container" key={`${index}${checkType}`}>
+                <input type="checkbox" className="item__check" onChange={onCheck.bind('input')} checked={checked} />
+                <label className="item__text">{task}</label>
+                <div className="btn btn__del" onClick={onCheck.bind(btnType)}>DEL</div>
+                <div className="task__line"></div>
             </div>
         })
     );
@@ -25,13 +25,16 @@ function Task(props) {
 class TaskList extends React.Component {
     state = {
         value: '',
+        nextTodoId: 0,
         todoList: [],
         doneList: []
     }
 
     handleInput = (e) => {
+        const { nextTodoId } = this.state
         this.setState({
-            value: e.target.value
+            value: e.target.value,
+            nextTodoId : nextTodoId + 1
         })
     }
 
@@ -50,7 +53,6 @@ class TaskList extends React.Component {
 
     /**
      * 勾选任务状态或删除任务
-        const text = this.inputText
      * @param {event}  发生点击事件的Event对象
      */
     alterTask = (event) => {
@@ -91,17 +93,16 @@ class TaskList extends React.Component {
         return (
             <div>
                 <nav className='nav'>
-                    <label className='nav__logo'>ToDoList</label>
-                    <input className='nav__task' value={value} onChange={this.handleInput} type='text' placeholder='添加任务' />
-                    <div className='nav__add' onClick={() => this.addTask()}>添加</div>
+                    <label className='nav__logo'>TodoList</label>
+                    <input className='nav__input' value={value} onChange={this.handleInput} type='text' placeholder='添加任务' />
+                    <div className='nav__add-btn' onClick={() => this.addTask()}>添加</div>
                 </nav>
-                <div className='task' onClick={this.alterTask}>
+                <div className='task-container' onClick={this.alterTask}>
                     <div className='task task--todo'>
                         <h3>待完成
-                            <span className='task__num'>{todoList.length}</span>
+                            <span className='btn btn__num btn__num--todo'>{todoList.length}</span>
                         </h3>
-                        <div className='task__line--first'></div>
-                        <div className='task--todo__list'>
+                        <div className='task__line task__line--first'></div>
                             <Task
                                 checkType='todo'
                                 btnType='del-todo'
@@ -109,21 +110,18 @@ class TaskList extends React.Component {
                                 onCheck={this.alterTask}
                                 taskList={todoList}
                             />
-                        </div>
                     </div>
                     <div className='task task--done'>
                         <h3>已完成
-                            <span className='task__num'>{doneList.length}</span>
+                            <span className='btn btn__num btn__num--done'>{doneList.length}</span>
                         </h3>
-                        <div className='task__line--first'></div>
-                        <div className='task--done__list'>
+                        <div className='task__line task__line--first'></div>
                             <Task
                                 checkType='done'
                                 btnType='del-done'
                                 checked='checked'
                                 taskList={doneList}
                             />
-                        </div>
                     </div>
                 </div>
                 <footer>

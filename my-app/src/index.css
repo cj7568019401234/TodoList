@@ -36,7 +36,7 @@ body {
 .nav__logo::before {
   content: "❤ ";
 }
-.nav__task {
+.nav__input {
   width: 350px;
   height: 20px;
   padding: 5px;
@@ -45,7 +45,7 @@ body {
   margin-right: 20px;
   border-radius: 5px;
 }
-.nav__add {
+.nav__add-btn {
   display: inline-block;
   height: 30px;
   line-height: 30px;
@@ -58,107 +58,98 @@ body {
   background-color: #ff8c00;
   box-shadow: 2px 2px 5px #888;
 }
-.nav__add:hover {
+.nav__add-btn:hover {
   cursor: pointer;
   background-color: #ffa500;
 }
-.nav__add:active {
+.nav__add-btn:active {
   transform: translate(1%, 1%);
   /*点击下沉效果*/
 }
 
 /* 以下是主体内容样式 */
-.Btn--num, .task--done__num, .task--todo__num {
-  float: right;
+.btn {
   width: 26px;
   height: 26px;
   line-height: 26px;
   margin: 0 auto;
   text-align: center;
-  font-size: 13px;
-  border-radius: 100%;
+  border-radius: 50%;
   color: white;
 }
-
-.Btn--del, .task--done .task__delBtn, .task--todo .task__delBtn {
+.btn__num {
+  float: right;
+  font-size: 13px;
+  font-weight: bold;
+}
+.btn__num--todo {
+  background-color: #ff8c00;
+  box-shadow: 2px 2px 5px #888;
+}
+.btn__num--done {
+  background-color: #696969;
+  box-shadow: 2px 2px 5px #111;
+}
+.btn__del {
   position: absolute;
   top: 50%;
   right: 0;
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
   font-size: 10px;
-  font-weight: bold;
-  border-radius: 50%;
-  color: white;
   transform: translateY(-50%);
 }
-.Btn--del:active, .task--done .task__delBtn:active, .task--todo .task__delBtn:active {
+.btn__del:active {
   transform: translate(1%, -49%);
 }
 
-.task {
-  width: 50%;
-  margin: 0 auto;
-}
-.task__div {
+.item-container {
   position: relative;
 }
-.task__check {
+.item__check {
   width: 16px;
   height: 16px;
   margin: 15px 8px 15px 0;
   vertical-align: middle;
 }
-.task__task {
+
+.task {
+  padding: 20px 30px;
+  margin-top: 20px;
+  border-radius: 5px;
   vertical-align: middle;
   line-height: 20px;
 }
-.task__line--first {
+.task-container {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+}
+.task__line {
   width: 100%;
   height: 1px;
-  margin-top: 20px;
   background-color: #c0c0c0;
 }
-.task__line--other {
-  width: 100%;
-  height: 1px;
-  background-color: #c0c0c0;
+.task__line--first {
+  margin-top: 20px;
 }
 .task--todo {
-  padding: 20px 30px;
-  margin-top: 20px;
   background-color: #faebd7;
-  border-radius: 5px;
 }
-.task--todo__num {
+.task--todo .btn__del {
   background-color: #ff8c00;
   box-shadow: 2px 2px 5px #888;
 }
-.task--todo .task__delBtn {
-  background-color: #ff8c00;
-  box-shadow: 2px 2px 5px #888;
-}
-.task--todo .task__delBtn:hover {
+.task--todo .btn__del:hover {
   cursor: pointer;
   background-color: #ffa500;
 }
 .task--done {
-  padding: 20px 30px;
-  margin-top: 20px;
   background-color: #a9a9a9;
-  border-radius: 5px;
 }
-.task--done__num {
+.task--done .btn__del {
   background-color: #696969;
   box-shadow: 2px 2px 5px #111;
 }
-.task--done .task__delBtn {
-  background-color: #696969;
-  box-shadow: 2px 2px 5px #111;
-}
-.task--done .task__delBtn:hover {
+.task--done .btn__del:hover {
   cursor: pointer;
   background-color: #808080;
 }
