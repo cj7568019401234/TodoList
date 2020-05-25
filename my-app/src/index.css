@@ -82,14 +82,6 @@ body {
   font-size: 13px;
   font-weight: bold;
 }
-.btn__num--todo {
-  background-color: #ff8c00;
-  box-shadow: 2px 2px 5px #888;
-}
-.btn__num--done {
-  background-color: #696969;
-  box-shadow: 2px 2px 5px #111;
-}
 .btn__del {
   position: absolute;
   top: 50%;
@@ -142,6 +134,10 @@ body {
   cursor: pointer;
   background-color: #ffa500;
 }
+.task--todo .btn__num {
+  background-color: #ff8c00;
+  box-shadow: 2px 2px 5px #888;
+}
 .task--done {
   background-color: #a9a9a9;
 }
@@ -152,6 +148,10 @@ body {
 .task--done .btn__del:hover {
   cursor: pointer;
   background-color: #808080;
+}
+.task--done .btn__num {
+  background-color: #696969;
+  box-shadow: 2px 2px 5px #111;
 }
 
 /* 以下是footer样式 */

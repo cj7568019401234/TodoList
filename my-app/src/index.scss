@@ -2,6 +2,7 @@ $bright-button-color: #ff8c00;
 $bright-active-button-color: #ffa500;
 $grey-button-color: #696969;
 $grey-active-button-color: #808080;
+
 /* 以下是全局样式 */
 * {
     margin: 0;
@@ -89,15 +90,6 @@ body {
         float: right;
         font-size: 13px;
         font-weight: bold;
-
-        &--todo {
-            background-color: $bright-button-color;
-            box-shadow: 2px 2px 5px #888;
-        }
-        &--done {
-            background-color: $grey-button-color;
-            box-shadow: 2px 2px 5px #111;
-        }
     }
 
     &__del {
@@ -161,6 +153,11 @@ body {
                 background-color: $bright-active-button-color;
             }
         }
+
+        .btn__num {
+            background-color: $bright-button-color;
+            box-shadow: 2px 2px 5px #888;
+        }
     }
 
     &--done {
@@ -174,6 +171,11 @@ body {
                 cursor: pointer;
                 background-color: $grey-active-button-color;
             }
+        }
+
+        .btn__num {
+            background-color: $grey-button-color;
+            box-shadow: 2px 2px 5px #111;
         }
     }
 }
