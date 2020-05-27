@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import './index.css';
 import TaskList from './task';
+import store from './Store.js'
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <TaskList />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
