@@ -6,7 +6,6 @@ let nextTaskId = 0;
 export const addTodo = (text) => ({
     type: ADD_TODO,
     id: nextTaskId++,
-    status: 'unfinished',
     text: text
 })
 
