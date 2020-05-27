@@ -3,20 +3,18 @@ import './index.css';
 
 /**
  * 任务
- * @param {props.taskType}  任务类型：unfinished为待完成；finished为已完成
  * @param {props.onCheck}   绑定函数：扭转状态或删除任务时调用
  * @param {props.checked}   勾选类型：待完成任务不勾选；已完成任务勾选
- * @param {props.taskList}  任务列表：包括所有任务，根据任务状态区分是待完成任务还是已完成任务
+ * @param {props.taskList}  任务列表：筛选过后的任务，可以直接展示
  */
 function Task(props) {
-    const { taskType, checked = '', onCheck, taskList = [] } = props
-    const todoList = taskList.filter(function (item) { return item.status === taskType }); //只过滤出当前状态的任务
+    const { checked = '', onCheck, taskList = [] } = props
     return (
-        todoList.map((task) => {
+        taskList.map((task) => {
             return <div className="item-container" key={task.id}>
-                <input type="checkbox" className="item__check" onChange={onCheck.bind(null, 'check', task.id)} checked={checked} />
+                <input type="checkbox" className="item__check" onChange={onCheck.bind(this, 'check', task.id)} checked={checked} />
                 <label className="item__text">{task.value}</label>
-                <div className="btn btn__del" onClick={onCheck.bind(null, 'delete', task.id)}>DEL</div>
+                <div className="btn btn__del" onClick={onCheck.bind(this, 'delete', task.id)}>DEL</div>
                 <div className="task__line"></div>
             </div>
         })
@@ -27,8 +25,6 @@ class TaskList extends React.Component {
     state = {
         value: '', //当前任务内容
         nextTodoId: 0, //当前任务id
-        unfinishedNum: 0, //未完成任务数
-        finishedNum: 0, //已完成任务数
         todoList: [] //任务列表
     }
 
@@ -46,7 +42,7 @@ class TaskList extends React.Component {
      * 添加新任务
      */
     addTask = () => {
-        const { value, todoList, nextTodoId, unfinishedNum } = this.state
+        const { value, todoList, nextTodoId } = this.state
         if (!value.trim()) return; //不允许添加空白任务
 
         //创建一个新任务
@@ -59,7 +55,6 @@ class TaskList extends React.Component {
         this.setState({
             value: '',
             nextTodoId: nextTodoId + 1,
-            unfinishedNum: unfinishedNum + 1,
             todoList: [...todoList, item]
         });
     };
@@ -69,8 +64,8 @@ class TaskList extends React.Component {
      * @param {event}  发生点击事件的Event对象
      */
     alterTask = (taskType, taskId) => {
-        var { todoList, unfinishedNum, finishedNum } = this.state;
-        var taskIndex = 0;
+        const { todoList } = this.state;
+        let taskIndex = 0;
 
         todoList.some((item, index) => { //查找
             if (item.id === taskId) {
@@ -78,36 +73,25 @@ class TaskList extends React.Component {
                 return true;
             }
             return false;
-        }
-        )
+        })
 
         const status = todoList[taskIndex].status;
         if (taskType === 'check') { //扭转任务状态
-            if (status === 'unfinished') { //如果任务是未完成的
-                todoList[taskIndex].status = 'finished';
-                unfinishedNum--;
-                finishedNum++;
-            } else { //任务是已完成的
-                todoList[taskIndex].status = 'unfinished';
-                unfinishedNum++;
-                finishedNum--;
-            }
+            todoList[taskIndex].status = status === 'unfinished' ? 'finished' : 'unfinished';
         } else if (taskType === 'delete') { //删除任务
-            if (status === 'unfinished') unfinishedNum--;
-            else finishedNum--;
-
-            todoList.splice(taskIndex, 1);//将任务从列表里面删除
+            todoList.splice(taskIndex, 1);
         } else return;
 
         this.setState({
-            finishedNum: finishedNum,
-            unfinishedNum: unfinishedNum,
             todoList: todoList,
         })
     };
 
     render() {
-        const { value, todoList, unfinishedNum, finishedNum } = this.state;
+        const { value, todoList } = this.state;
+        const unfinishedList = todoList.filter(item => item.status === 'unfinished');   //过滤出未完成的任务
+        const finishedList = todoList.filter(item => item.status === 'finished');    //过滤出已完成的任务
+
         return (
             <div>
                 <nav className='nav'>
@@ -118,25 +102,23 @@ class TaskList extends React.Component {
                 <div className='task-container'>
                     <div className='task task--todo'>
                         <h3>待完成
-                            <span className='btn btn__num'>{unfinishedNum}</span>
+                            <span className='btn btn__num'>{unfinishedList.length}</span>
                         </h3>
                         <div className='task__line task__line--first'></div>
                         <Task
-                            taskType='unfinished'
                             onCheck={this.alterTask}
-                            taskList={todoList}
+                            taskList={unfinishedList}
                         />
                     </div>
                     <div className='task task--done'>
                         <h3>已完成
-                            <span className='btn btn__num'>{finishedNum}</span>
+                            <span className='btn btn__num'>{finishedList.length}</span>
                         </h3>
                         <div className='task__line task__line--first'></div>
                         <Task
-                            taskType='finished'
                             checked='checked'
                             onCheck={this.alterTask}
-                            taskList={todoList}
+                            taskList={finishedList}
                         />
                     </div>
                 </div>
