@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import './index.css';
+import { addTodo } from '../actions';
 
-
-class Addtodo extends React.Component {
+class AddTodo extends React.Component {
 
     /**
      * 处理导航栏的输入框内容发生变化
@@ -18,40 +19,46 @@ class Addtodo extends React.Component {
      * 添加新任务
      */
     addTask = () => {
-        const { value, todoList, nextTodoId } = this.state
+        const { value } = this.state
         if (!value.trim()) return; //不允许添加空白任务
 
-        //创建一个新任务
-        const item = {
-            value: value, //任务描述
-            id: nextTodoId, //任务id，唯一
-            status: 'unfinished'  //任务状态，未完成：'unfinished'；已完成：'finished'
-        }
+        this.props.onAdd(value);  //发出添加任务的action
 
-        this.setState({
+        this.setState({ //添加任务后，输入框清空
             value: '',
-            nextTodoId: nextTodoId + 1,
-            todoList: [...todoList, item]
         });
     };
 
     render() {
-        const { value } = this.state;
-
         return (
             <div>
                 <nav className='nav'>
                     <label className='nav__logo'>TodoList</label>
-                    <input className='nav__input' value={value} onChange={this.handleInput} type='text' placeholder='添加任务' />
+                    <input className='nav__input' value={this.state.value} onChange={this.handleInput} type='text' placeholder='添加任务' />
                     <div className='nav__add-btn' onClick={() => this.addTask()}>添加</div>
                 </nav>
-                
-                <footer>
-                    <p>Copyright © 2020 ToDoList. Posted by : Cj</p>
-                </footer>
             </div>
         );
     }
 }
 
-export default AddTodo;
+/**
+ * 使用PropTypes进行类型检查
+ */
+AddTodo.propTypes = {
+    add: PropTypes.func.isRequired  //指定add函数被传递给组件
+}
+
+/**
+ * 将需要绑定的响应事件注入到组件上（props上）
+ * @param {dispatch}  dispatch() 方法
+ */
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAdd: (text) => {    //将addTodo这个action 作为 props 绑定到组件中
+            dispatch(addTodo(text)) 
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(AddTodo); //将store和组件联系在一起

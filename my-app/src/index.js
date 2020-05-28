@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import './index.css';
 import TaskList from './todos/view/task';
 import store from './Store.js'
 import * as serviceWorker from './serviceWorker';
