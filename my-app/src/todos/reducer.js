@@ -7,7 +7,7 @@ export default (state = [], action) => {
                 {
                     id: action.id,
                     text: action.text,
-                    finished: false //新增任务的初始状态为未完成
+                    isFinished: false //新增任务的初始状态为未完成
                 },
                 ...state
             ]
@@ -17,7 +17,7 @@ export default (state = [], action) => {
                 if (item.id === action.id) {
                     return {
                         ...item,
-                        finished: !item.finished,   //扭转状态
+                        isFinished: !item.isFinished,   //扭转状态
                     }
                 } else {
                     return item;

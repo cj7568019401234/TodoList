@@ -8,10 +8,10 @@ import './index.css';
  */
 class item extends React.Component {
     render() {
-        const { id, text, finished, onToggle, onDelete } = this.props;
+        const { id, text, isFinished, onToggle, onDelete } = this.props;
         return (
             < div className="item-container" key={id} >
-                <input type="checkbox" className="item__check" onChange={onToggle} checked={finished ? 'checked' : ''} />
+                <input type="checkbox" className="item__check" onChange={onToggle} checked={isFinished ? 'checked' : ''} />
                 <label className="item__text">{text}</label>
                 <div className="btn btn__del" onClick={onDelete}>DEL</div>
                 <div className="task__line"></div>
@@ -28,7 +28,7 @@ item.propTypes = {
     text: PropTypes.string.isRequired,  //任务的内容
     onToggle: PropTypes.func.isRequired,    //扭转任务的函数
     onDelete: PropTypes.func.isRequired,    //删除任务的函数
-    finished: PropTypes.bool.isRequired,    //任务的完成状态
+    isFinished: PropTypes.bool.isRequired,    //任务的完成状态
 }
 
 /**

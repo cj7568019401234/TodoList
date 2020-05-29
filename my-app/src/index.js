@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import TaskList from './todos/view/task';
+import { Provider } from 'react-redux';
+import Todo from './todos/view/todo';
 import store from './Store.js'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
-    <TaskList />
+    <Todo />
   </Provider>,
   document.getElementById('root')
 );
