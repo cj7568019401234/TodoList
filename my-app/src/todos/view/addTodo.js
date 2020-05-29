@@ -1,9 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './index.css';
 import { addTodo } from '../actions';
 
 class AddTodo extends React.Component {
+    state = {
+        value: ''
+    }
 
     /**
      * 处理导航栏的输入框内容发生变化
@@ -46,7 +50,7 @@ class AddTodo extends React.Component {
  * 使用PropTypes进行类型检查
  */
 AddTodo.propTypes = {
-    add: PropTypes.func.isRequired  //指定add函数被传递给组件
+    onAdd: PropTypes.func.isRequired  //指定add函数被传递给组件
 }
 
 /**
@@ -56,7 +60,7 @@ AddTodo.propTypes = {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAdd: (text) => {    //将addTodo这个action 作为 props 绑定到组件中
-            dispatch(addTodo(text)) 
+            dispatch(addTodo(text))
         }
     }
 }

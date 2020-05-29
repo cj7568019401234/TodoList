@@ -1,5 +1,4 @@
-import React from 'react';
-import reducer from '/todo/reducer.js'
+import reducer from './todos/reducer.js'
 import { createStore } from 'redux';
 
 const initState = {

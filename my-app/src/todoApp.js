@@ -1,9 +1,9 @@
 import React from 'react';
-import AddTodo from './addTodo.js'
-import TodoList from './todoList.js';
-import './index.css';
+import AddTodo from './todos/view/addTodo.js'
+import TodoList from './todos/view/todoList.js';
+import './todos/view/index.css';
 
-export default ()=> {
+function TodoApp() {
     return (
         <div>
             <AddTodo />
@@ -14,3 +14,5 @@ export default ()=> {
         </div>
     );
 }
+
+export default TodoApp;
