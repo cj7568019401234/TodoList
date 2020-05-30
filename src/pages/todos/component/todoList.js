@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Item from './item.js';
-import './index.css';
+import '../index.css';
 
 
 /**

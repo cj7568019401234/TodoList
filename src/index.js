@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import TodoApp from './todoApp.js';
-import store from './Store.js'
+import TodoApp from './pages/todos/index';
+import store from './store/index.js'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

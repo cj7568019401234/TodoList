@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleTodo, deleteTodo } from '../actions.js'
-import './index.css';
+import { actions } from '../../../store/todos/index'
+import '../index.css';
 
 /**
  * 单个任务组件
  */
-class item extends React.Component {
+class Item extends React.Component {
     render() {
         const { id, text, isFinished, onToggle, onDelete } = this.props;
         return (
@@ -24,7 +24,7 @@ class item extends React.Component {
 /**
  * 使用PropTypes进行类型检查
  */
-item.propTypes = {
+Item.propTypes = {
     id: PropTypes.number.isRequired,    //每个任务的id
     text: PropTypes.string.isRequired,  //任务的内容
     onToggle: PropTypes.func.isRequired,    //扭转任务的函数
@@ -40,10 +40,10 @@ item.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps;
     return {
-        onToggle: () => dispatch(toggleTodo(id)),
-        onDelete: () => dispatch(deleteTodo(id))
+        onToggle: () => dispatch(actions.toggleTodo(id)),
+        onDelete: () => dispatch(actions.deleteTodo(id))
     }
 
 };
 
-export default connect(null, mapDispatchToProps)(item)
+export default connect(null, mapDispatchToProps)(Item)

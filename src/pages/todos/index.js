@@ -1,7 +1,5 @@
 import React from 'react';
-import AddTodo from './todos/view/addTodo.js'
-import TodoList from './todos/view/todoList.js';
-import './todos/view/index.css';
+import { AddTodo, TodoList } from './component/index'
 
 function TodoApp() {
     return (

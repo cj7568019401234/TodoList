@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import './index.css';
-import { addTodo } from '../actions';
+import { actions } from '../../../store/todos/index';
+import '../index.css';
 
 class AddTodo extends React.Component {
     state = {
@@ -60,7 +60,7 @@ AddTodo.propTypes = {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAdd: (text) => {    //将addTodo这个action 作为 props 绑定到组件中
-            dispatch(addTodo(text))
+            dispatch(actions.addTodo(text))
         }
     }
 }
