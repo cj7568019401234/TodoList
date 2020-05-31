@@ -1,5 +1,6 @@
 import React from 'react';
 import { AddTodo, TodoList } from './component/index'
+import 'antd/dist/antd.css'
 
 function TodoApp() {
     return (

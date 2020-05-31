@@ -18,11 +18,7 @@ body {
 
 /* 以下是导航栏样式 */
 .nav {
-    height: 70px;
-    background-color: #363636;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
+    text-align:center;
 
     &::before {
         content: "";
@@ -43,13 +39,15 @@ body {
     }
 
     &__input {
-        width: 350px;
-        height: 20px;
-        padding: 5px;
-        margin: 5px;
-        margin-left: 10%;
-        margin-right: 20px;
-        border-radius: 5px;
+        display: inline-block;
+        width: 400px;
+        margin-left: 5%;
+        // position: absolute;
+        // top: 50%;
+        // transform: translateY(-50%);
+        .ant-input-group-wrapper{
+            vertical-align: middle;
+        }
     }
 
     &__add-btn {

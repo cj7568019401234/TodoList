@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Layout } from 'antd';
+import { Input } from 'antd';
 import { actions } from '../../../store/todos/index';
 import '../index.css';
+
+const { Header } = Layout;
+const { Search } = Input;
+
 
 class AddTodo extends React.Component {
     state = {
@@ -35,13 +41,21 @@ class AddTodo extends React.Component {
 
     render() {
         return (
-            <div>
-                <nav className='nav'>
+            <Layout>
+                <Header className='nav'>
                     <label className='nav__logo'>TodoList</label>
-                    <input className='nav__input' value={this.state.value} onChange={this.handleInput} type='text' placeholder='添加任务' />
-                    <div className='nav__add-btn' onClick={() => this.addTask()}>添加</div>
-                </nav>
-            </div>
+                    <div className='nav__input'>
+                        <Search
+                            placeholder="请输入任务"
+                            enterButton="添加"
+                            size="middle"
+                            onChange={this.handleInput}
+                            value={this.state.value}
+                            onSearch={() => this.addTask()}
+                        />
+                    </div>
+                </Header>
+            </Layout>
         );
     }
 }

@@ -16,6 +16,7 @@ class Item extends React.Component {
                 <label className="item__text">{text}</label>
                 <div className="btn btn__del" onClick={onDelete}>DEL</div>
                 <div className="task__line"></div>
+                {/* <Divider /> */}
             </div >
         )
     }

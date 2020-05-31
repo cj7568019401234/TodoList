@@ -1,9 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Collapse, Select } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 import Item from './item.js';
 import '../index.css';
 
+const { Panel } = Collapse;
+const { Option } = Select;
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
 
 /**
  * 任务列表
@@ -11,10 +20,49 @@ import '../index.css';
  * @param {finishedList} 已完成任务列表 
  */
 const TodoList = ({ unfinishedList, finishedList }) => {
+
+    const state = {
+        expandIconPosition: 'left',
+    };
+
+    const onPositionChange = expandIconPosition => {
+        this.setState({ expandIconPosition });
+    };
+
+    const genExtra = () => (
+        <SettingOutlined
+            onClick={event => {
+                // If you don't want click extra trigger collapse, you can prevent this:
+                event.stopPropagation();
+            }}
+        />
+    );
+
     return (
         <div>
             <div className='task-container'>
-                <div className='task task--todo'>
+                <Collapse
+                    defaultActiveKey={['1']}
+                //   onChange={}
+                //   expandIconPosition={}
+                >
+                    <Panel header="待完成" key="1" extra={genExtra()}>        
+                    {
+                        unfinishedList.map((item) => (
+                            <Item
+                                id={item.id}
+                                text={item.text}
+                                isFinished={item.isFinished}
+                            />
+                        ))
+                    }
+                    </Panel>
+                    <Panel header="已完成" key="2" extra={genExtra()}>
+                        <div>{text}</div>
+                    </Panel>
+                </Collapse>
+
+                {/* <div className='task task--todo'>
                     <h3>待完成
                         <span className='btn btn__num'>{unfinishedList.length}</span>
                     </h3>
@@ -28,7 +76,7 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                             />
                         ))
                     }
-                </div>
+                </div> */}
                 <div className='task task--done'>
                     <h3>已完成
                         <span className='btn btn__num'>{finishedList.length}</span>
