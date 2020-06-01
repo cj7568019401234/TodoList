@@ -84,9 +84,6 @@ body {
   font-size: 10px;
   transform: translateY(-50%);
 }
-.btn__del:active {
-  transform: translate(1%, -49%);
-}
 
 .item-container {
   position: relative;
@@ -100,7 +97,7 @@ body {
 
 .task-container {
   width: 50%;
-  margin: 20px auto;
+  margin: 35px auto;
   position: relative;
 }
 .task-container .ant-collapse-content > .ant-collapse-content-box {
@@ -108,6 +105,9 @@ body {
 }
 .task-container .ant-divider-horizontal {
   margin: 0;
+}
+.task-container .ant-empty-image {
+  margin: 20px;
 }
 .task__line {
   width: 100%;
@@ -121,13 +121,9 @@ body {
 .task--todo {
   background-color: #faebd7;
 }
-.task--todo .btn__del {
+.task--todo .ant-radio-button-wrapper {
   background-color: #ff8c00;
-  box-shadow: 2px 2px 5px #888;
-}
-.task--todo .btn__del:hover {
-  cursor: pointer;
-  background-color: #ffa500;
+  color: white;
 }
 .task--todo .btn__num {
   background-color: #ff8c00;
@@ -135,14 +131,6 @@ body {
 }
 .task--done {
   background-color: #a9a9a9;
-}
-.task--done .btn__del {
-  background-color: #696969;
-  box-shadow: 2px 2px 5px #111;
-}
-.task--done .btn__del:hover {
-  cursor: pointer;
-  background-color: #808080;
 }
 .task--done .btn__num {
   background-color: #696969;

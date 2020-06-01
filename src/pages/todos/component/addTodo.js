@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
-import { Input } from 'antd';
+import { Layout, Input } from 'antd';
 import { actions } from '../../../store/todos/index';
 import '../index.css';
 

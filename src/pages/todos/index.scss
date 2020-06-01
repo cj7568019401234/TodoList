@@ -42,6 +42,7 @@ body {
         display: inline-block;
         width:400px;
         margin-left: 8%;
+
         .ant-input-group-wrapper{
             vertical-align: middle;
         }
@@ -93,10 +94,6 @@ body {
         right: 0;
         font-size: 10px;
         transform: translateY(-50%);
-
-        &:active {
-            transform: translate(1%, -49%);
-        }
     }
 }
 
@@ -114,16 +111,9 @@ body {
 }
 
 .task {
-    // padding: 20px 30px;
-    // margin-top: 20px;
-    // border-radius: 5px;
-    // vertical-align: middle;
-    // line-height: 20px;
-
     &-container {
         width: 50%;
-        // margin: 0 auto;
-        margin: 20px auto;
+        margin: 35px auto;
         position: relative;
         
         .ant-collapse-content > .ant-collapse-content-box {
@@ -132,6 +122,10 @@ body {
 
         .ant-divider-horizontal{
             margin: 0;
+        }
+
+        .ant-empty-image{
+            margin:20px;
         }
     }
 
@@ -148,15 +142,12 @@ body {
 
     &--todo {
         background-color: #faebd7;
+        // background-color: #1890ff;
 
-        .btn__del {
+        .ant-radio-button-wrapper{
             background-color: $bright-button-color;
-            box-shadow: 2px 2px 5px #888;
+            color: white;
 
-            &:hover {
-                cursor: pointer;
-                background-color: $bright-active-button-color;
-            }
         }
 
         .btn__num {
@@ -167,16 +158,6 @@ body {
 
     &--done {
         background-color: #a9a9a9;
-
-        .btn__del {
-            background-color: $grey-button-color;
-            box-shadow: 2px 2px 5px #111;
-
-            &:hover {
-                cursor: pointer;
-                background-color: $grey-active-button-color;
-            }
-        }
 
         .btn__num {
             background-color: $grey-button-color;

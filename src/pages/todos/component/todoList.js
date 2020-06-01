@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Collapse } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
+import { Empty } from 'antd';
 import Item from './item.js';
 import '../index.css';
 
 const { Panel } = Collapse;
-// const { Option } = Select;
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
 
 /**
  * 任务列表
@@ -36,6 +31,8 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                 event.stopPropagation();
             }}
         />
+
+        
     );
 
     return (
@@ -47,7 +44,8 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                 //   expandIconPosition={}
                 >
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra()}>
-                        {
+
+                        {unfinishedList.length ? (
                             unfinishedList.map((item) => (
                                 <Item
                                     id={item.id}
@@ -55,10 +53,12 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                                     isFinished={item.isFinished}
                                 />
                             ))
-                        }
+                        ) : (
+                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="你还没有添加任务呢~"/>
+                            )}
                     </Panel>
                     <Panel className='task task--done' header="已完成" key="2" extra={genExtra()}>
-                        {
+                        {finishedList.length ? (
                             finishedList.map((item) => (
                                 <Item
                                     id={item.id}
@@ -66,40 +66,11 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                                     isFinished={item.isFinished}
                                 />
                             ))
-                        }
+                        ) : (
+                            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="空空如也~"/>
+                        )}
                     </Panel>
                 </Collapse>
-
-                {/* <div className='task task--todo'>
-                    <h3>待完成
-                        <span className='btn btn__num'>{unfinishedList.length}</span>
-                    </h3>
-                    <div className='task__line task__line--first'></div>
-                    {
-                        unfinishedList.map((item) => (
-                            <Item
-                                id={item.id}
-                                text={item.text}
-                                isFinished={item.isFinished}
-                            />
-                        ))
-                    }
-                </div> */}
-                {/* <div className='task task--done'>
-                    <h3>已完成
-                        <span className='btn btn__num'>{finishedList.length}</span>
-                    </h3>
-                    <div className='task__line task__line--first'></div>
-                    {
-                        finishedList.map((item) => (
-                            <Item
-                                id={item.id}
-                                text={item.text}
-                                isFinished={item.isFinished}
-                            />
-                        ))
-                    }
-                </div> */}
             </div>
         </div>
     );

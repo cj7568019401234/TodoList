@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Divider } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { actions } from '../../../store/todos/index'
 import '../index.css';
 
@@ -15,10 +16,8 @@ class Item extends React.Component {
             < div className="item-container" key={id} >
                 <input type="checkbox" className="item__check" onChange={onToggle} checked={isFinished ? 'checked' : ''} />
                 <label className="item__text">{text}</label>
-                <div className="btn btn__del" onClick={onDelete}>DEL</div>
-                {/* <div className="task__line"></div> */}
+                <DeleteOutlined  className="btn__del" onClick={onDelete} />
                 <Divider dashed />
-                {/* <Divider /> */}
             </div >
         )
     }
