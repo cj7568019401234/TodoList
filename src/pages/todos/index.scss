@@ -28,7 +28,7 @@ body {
     }
 
     &__logo {
-        color: pink;
+        color: white;
         font: bold 28px/1 sans-serif;
         display: inline-block;
         vertical-align: middle;
@@ -40,11 +40,8 @@ body {
 
     &__input {
         display: inline-block;
-        width: 400px;
-        margin-left: 5%;
-        // position: absolute;
-        // top: 50%;
-        // transform: translateY(-50%);
+        width:400px;
+        margin-left: 8%;
         .ant-input-group-wrapper{
             vertical-align: middle;
         }
@@ -117,21 +114,31 @@ body {
 }
 
 .task {
-    padding: 20px 30px;
-    margin-top: 20px;
-    border-radius: 5px;
-    vertical-align: middle;
-    line-height: 20px;
+    // padding: 20px 30px;
+    // margin-top: 20px;
+    // border-radius: 5px;
+    // vertical-align: middle;
+    // line-height: 20px;
 
     &-container {
         width: 50%;
-        margin: 0 auto;
+        // margin: 0 auto;
+        margin: 20px auto;
         position: relative;
+        
+        .ant-collapse-content > .ant-collapse-content-box {
+            padding-top:0;
+        }
+
+        .ant-divider-horizontal{
+            margin: 0;
+        }
     }
 
     &__line {
         width: 100%;
         height: 1px;
+        margin: 0;
         background-color: #c0c0c0;
 
         &--first {

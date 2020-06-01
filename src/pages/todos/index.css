@@ -24,7 +24,7 @@ body {
   height: 100%;
 }
 .nav__logo {
-  color: pink;
+  color: white;
   font: bold 28px/1 sans-serif;
   display: inline-block;
   vertical-align: middle;
@@ -35,7 +35,7 @@ body {
 .nav__input {
   display: inline-block;
   width: 400px;
-  margin-left: 5%;
+  margin-left: 8%;
 }
 .nav__input .ant-input-group-wrapper {
   vertical-align: middle;
@@ -98,21 +98,21 @@ body {
   vertical-align: middle;
 }
 
-.task {
-  padding: 20px 30px;
-  margin-top: 20px;
-  border-radius: 5px;
-  vertical-align: middle;
-  line-height: 20px;
-}
 .task-container {
   width: 50%;
-  margin: 0 auto;
+  margin: 20px auto;
   position: relative;
+}
+.task-container .ant-collapse-content > .ant-collapse-content-box {
+  padding-top: 0;
+}
+.task-container .ant-divider-horizontal {
+  margin: 0;
 }
 .task__line {
   width: 100%;
   height: 1px;
+  margin: 0;
   background-color: #c0c0c0;
 }
 .task__line--first {

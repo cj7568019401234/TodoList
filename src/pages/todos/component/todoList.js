@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Collapse, Select } from 'antd';
+import { Collapse } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 import Item from './item.js';
 import '../index.css';
 
 const { Panel } = Collapse;
-const { Option } = Select;
+// const { Option } = Select;
 const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,
@@ -21,13 +21,13 @@ const text = `
  */
 const TodoList = ({ unfinishedList, finishedList }) => {
 
-    const state = {
-        expandIconPosition: 'left',
-    };
+    // const state = {
+    //     expandIconPosition: 'left',
+    // };
 
-    const onPositionChange = expandIconPosition => {
-        this.setState({ expandIconPosition });
-    };
+    // const onPositionChange = expandIconPosition => {
+    //     this.setState({ expandIconPosition });
+    // };
 
     const genExtra = () => (
         <SettingOutlined
@@ -46,19 +46,27 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                 //   onChange={}
                 //   expandIconPosition={}
                 >
-                    <Panel header="待完成" key="1" extra={genExtra()}>        
-                    {
-                        unfinishedList.map((item) => (
-                            <Item
-                                id={item.id}
-                                text={item.text}
-                                isFinished={item.isFinished}
-                            />
-                        ))
-                    }
+                    <Panel className='task task--todo' header="待完成" key="1" extra={genExtra()}>
+                        {
+                            unfinishedList.map((item) => (
+                                <Item
+                                    id={item.id}
+                                    text={item.text}
+                                    isFinished={item.isFinished}
+                                />
+                            ))
+                        }
                     </Panel>
-                    <Panel header="已完成" key="2" extra={genExtra()}>
-                        <div>{text}</div>
+                    <Panel className='task task--done' header="已完成" key="2" extra={genExtra()}>
+                        {
+                            finishedList.map((item) => (
+                                <Item
+                                    id={item.id}
+                                    text={item.text}
+                                    isFinished={item.isFinished}
+                                />
+                            ))
+                        }
                     </Panel>
                 </Collapse>
 
@@ -77,7 +85,7 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                         ))
                     }
                 </div> */}
-                <div className='task task--done'>
+                {/* <div className='task task--done'>
                     <h3>已完成
                         <span className='btn btn__num'>{finishedList.length}</span>
                     </h3>
@@ -91,7 +99,7 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                             />
                         ))
                     }
-                </div>
+                </div> */}
             </div>
         </div>
     );
