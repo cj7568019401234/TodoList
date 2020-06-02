@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Collapse } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
-import { Empty } from 'antd';
+import { Collapse, Statistic, Row, Col, Empty } from 'antd';
+import { SmileOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import Item from './item.js';
 import '../index.css';
 
@@ -24,16 +23,21 @@ const TodoList = ({ unfinishedList, finishedList }) => {
     //     this.setState({ expandIconPosition });
     // };
 
-    const genExtra = () => (
-        <SettingOutlined
-            onClick={event => {
-                // If you don't want click extra trigger collapse, you can prevent this:
-                event.stopPropagation();
-            }}
-        />
+    const genExtra = (type) => (
+        type === 'unfinished' ?
+            <Row gutter={1}>
+                <Col span={36}>
+                    <Statistic title="待办" value={unfinishedList.length} prefix={<SmileOutlined />} />
+                </Col>
+            </Row>
+            :
+            <Row gutter={1}>
+                <Col span={36}>
+                    <Statistic title="完成" value={finishedList.length} prefix={<CheckCircleOutlined />} />
+                </Col>
+            </Row>
 
-        
-    );
+    )
 
     return (
         <div>
@@ -43,7 +47,7 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                 //   onChange={}
                 //   expandIconPosition={}
                 >
-                    <Panel className='task task--todo' header="待完成" key="1" extra={genExtra()}>
+                    <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>
 
                         {unfinishedList.length ? (
                             unfinishedList.map((item) => (
@@ -54,10 +58,11 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                                 />
                             ))
                         ) : (
-                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="你还没有添加任务呢~"/>
-                            )}
+                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="你还没有添加任务呢~" />
+                            )
+                        }
                     </Panel>
-                    <Panel className='task task--done' header="已完成" key="2" extra={genExtra()}>
+                    <Panel className='task task--done' header="已完成" key="2" extra={genExtra('finished')}>
                         {finishedList.length ? (
                             finishedList.map((item) => (
                                 <Item
@@ -67,8 +72,9 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                                 />
                             ))
                         ) : (
-                            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="空空如也~"/>
-                        )}
+                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="空空如也~" />
+                            )
+                        }
                     </Panel>
                 </Collapse>
             </div>

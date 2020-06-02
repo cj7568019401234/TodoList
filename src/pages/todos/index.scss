@@ -1,5 +1,6 @@
 $bright-button-color: #ff8c00;
 $bright-active-button-color: #ffa500;
+$bright-background-color:#faebd7;
 $grey-button-color: #696969;
 $grey-active-button-color: #808080;
 
@@ -28,7 +29,7 @@ body {
     }
 
     &__logo {
-        color: white;
+        color: $bright-background-color;
         font: bold 28px/1 sans-serif;
         display: inline-block;
         vertical-align: middle;
@@ -141,7 +142,7 @@ body {
     }
 
     &--todo {
-        background-color: #faebd7;
+        background-color: $bright-background-color;
         // background-color: #1890ff;
 
         .ant-radio-button-wrapper{
