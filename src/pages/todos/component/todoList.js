@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Collapse, Statistic, Row, Col, Empty } from 'antd';
+import { Collapse, Statistic, Empty } from 'antd';
 import { SmileOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import Item from './item.js';
 import '../index.css';
@@ -23,29 +23,20 @@ const TodoList = ({ unfinishedList, finishedList }) => {
     //     this.setState({ expandIconPosition });
     // };
 
-    const genExtra = (type) => (
+    const genExtra = (type) => (    //任务列表右上角的任务数量
         type === 'unfinished' ?
-            <Row gutter={1}>
-                <Col span={36}>
-                    <Statistic title="待办" value={unfinishedList.length} prefix={<SmileOutlined />} />
-                </Col>
-            </Row>
+            <Statistic value={unfinishedList.length} prefix={<SmileOutlined />} />
             :
-            <Row gutter={1}>
-                <Col span={36}>
-                    <Statistic title="完成" value={finishedList.length} prefix={<CheckCircleOutlined />} />
-                </Col>
-            </Row>
-
+            <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
+
+
 
     return (
         <div>
             <div className='task-container'>
                 <Collapse
                     defaultActiveKey={['1']}
-                //   onChange={}
-                //   expandIconPosition={}
                 >
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>
 

@@ -34,7 +34,7 @@ body {
 }
 .nav__input {
   display: inline-block;
-  width: 400px;
+  width: 350px;
   margin-left: 8%;
 }
 .nav__input .ant-input-group-wrapper {
@@ -87,11 +87,20 @@ body {
 
 .item-container {
   position: relative;
+  margin: 10px auto;
+}
+.item-container .ant-divider {
+  margin: 10px auto;
+  border-color: #C0C0C0;
+}
+.item-container .ant-checkbox-inner {
+  border-color: #808080;
 }
 .item__check {
-  width: 16px;
-  height: 16px;
-  margin: 15px 8px 15px 0;
+  vertical-align: middle;
+}
+.item__text {
+  margin-left: 8px;
   vertical-align: middle;
 }
 
@@ -103,38 +112,21 @@ body {
 .task-container .ant-collapse-content > .ant-collapse-content-box {
   padding-top: 0;
 }
-.task-container .ant-divider-horizontal {
-  margin: 0;
-}
 .task-container .ant-empty-image {
   margin: 20px;
 }
-.task__line {
-  width: 100%;
-  height: 1px;
-  margin: 0;
-  background-color: #c0c0c0;
-}
-.task__line--first {
-  margin-top: 20px;
+.task-container .ant-statistic {
+  line-height: 0.5715;
 }
 .task--todo {
   background-color: #faebd7;
 }
-.task--todo .ant-radio-button-wrapper {
-  background-color: #ff8c00;
-  color: white;
-}
-.task--todo .btn__num {
-  background-color: #ff8c00;
-  box-shadow: 2px 2px 5px #888;
-}
 .task--done {
   background-color: #a9a9a9;
 }
-.task--done .btn__num {
-  background-color: #696969;
-  box-shadow: 2px 2px 5px #111;
+.task--done .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #808080;
+  border-color: #808080;
 }
 
 /* 以下是footer样式 */
