@@ -1,6 +1,6 @@
 $bright-button-color: #ff8c00;
 $bright-active-button-color: #ffa500;
-$bright-background-color:#faebd7;
+$bright-background-color: #faebd7;
 $grey-button-color: #696969;
 $grey-active-button-color: #808080;
 
@@ -19,61 +19,33 @@ body {
 
 /* 以下是导航栏样式 */
 .nav {
-    text-align:center;
-
-    &::before {
-        content: "";
-        display: inline-block;
-        vertical-align: middle;
-        height: 100%;
-    }
+    text-align: center;
 
     &__logo {
         color: $bright-background-color;
         font: bold 28px/1 sans-serif;
-        display: inline-block;
         vertical-align: middle;
-
-        &::before {
-            content: "❤ ";
-        }
     }
 
+    .ant-picker {
+        margin-left: 10px;
+        padding: 4px;
+    }
+
+    &__date {
+        .ant-picker-input > input::-webkit-input-placeholder{
+                // color:#fff;
+                content: '0--------';
+            
+        }
+    }
     &__input {
         display: inline-block;
-        width:350px;
-        margin-left: 8%;
+        width: 300px;
+        margin-left: 10px;
 
-        .ant-input-group-wrapper{
+        .ant-input-group-wrapper {
             vertical-align: middle;
-        }
-
-        // .ant-btn-primary{
-        //     border-color: $bright-button-color;
-        //     background-color: $bright-active-button-color;
-        // }
-    }
-
-    &__add-btn {
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 10px;
-        text-align: center;
-        font-size: 13px;
-        font-weight: bold;
-        border-radius: 5px;
-        color: white;
-        background-color: $bright-button-color;
-        box-shadow: 2px 2px 5px #888;
-
-        &:hover {
-            cursor: pointer;
-            background-color: $bright-active-button-color;
-        }
-
-        &:active {
-            transform: translate(1%, 1%); /*点击下沉效果*/
         }
     }
 }
@@ -87,12 +59,6 @@ body {
     text-align: center;
     border-radius: 50%;
     color: white;
-
-    &__num {
-        float: right;
-        font-size: 13px;
-        font-weight: bold;
-    }
 
     &__del {
         position: absolute;
@@ -108,13 +74,13 @@ body {
         position: relative;
         margin: 10px auto;
 
-        .ant-divider{
+        .ant-divider {
             margin: 10px auto;
-            border-color:#C0C0C0;
+            border-color: #c0c0c0;
         }
 
-        .ant-checkbox-inner{
-            border-color:$grey-active-button-color;
+        .ant-checkbox-inner {
+            border-color: $grey-active-button-color;
         }
     }
 
@@ -122,7 +88,7 @@ body {
         vertical-align: middle;
     }
 
-    &__text{
+    &__text {
         margin-left: 8px;
         vertical-align: middle;
     }
@@ -133,31 +99,30 @@ body {
         width: 50%;
         margin: 35px auto;
         position: relative;
-        
+
         .ant-collapse-content > .ant-collapse-content-box {
-            padding-top:0;
+            padding-top: 0;
         }
 
-        .ant-empty-image{
-            margin:20px;
+        .ant-empty-image {
+            margin: 20px;
         }
 
-        .ant-statistic{
-            line-height: .5715;
+        .ant-statistic {
+            line-height: 0.5715;
         }
     }
 
     &--todo {
         background-color: $bright-background-color;
-
     }
 
     &--done {
         background-color: #a9a9a9;
 
-        .ant-checkbox-checked .ant-checkbox-inner{
+        .ant-checkbox-checked .ant-checkbox-inner {
             background-color: $grey-active-button-color;
-            border-color:$grey-active-button-color;
+            border-color: $grey-active-button-color;
         }
     }
 }

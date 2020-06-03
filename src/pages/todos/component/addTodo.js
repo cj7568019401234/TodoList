@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Layout, Input } from 'antd';
+import { Layout, Input,DatePicker,TimePicker } from 'antd';
 import { actions } from '../../../store/todos/index';
+import moment from 'moment';
 import '../index.css';
+
 
 const { Header } = Layout;
 const { Search } = Input;
+const { RangePicker } = DatePicker;
+const dateFormat = 'YYYY/MM/DD';
+const format = 'HH:mm';
 
 
 class AddTodo extends React.Component {
@@ -42,7 +47,11 @@ class AddTodo extends React.Component {
         return (
             <Layout>
                 <Header className='nav'>
-                    <label className='nav__logo'>TodoList</label>
+                    <label className='nav__logo'>❤ TodoList</label>
+
+                    <DatePicker  className='nav__date' format={dateFormat} />
+                    <TimePicker  className='nav__time' format={format} />
+
                     <div className='nav__input'>
                         <Search
                             placeholder="请输入任务"
