@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Layout, Input,DatePicker,TimePicker } from 'antd';
+import { Layout, Input, DatePicker, TimePicker } from 'antd';
 import { actions } from '../../../store/todos/index';
 import moment from 'moment';
 import '../index.css';
@@ -16,7 +16,9 @@ const format = 'HH:mm';
 
 class AddTodo extends React.Component {
     state = {
-        value: ''
+        value: '',
+        endDate: '',
+        endTime: '',
     }
 
     /**
@@ -33,10 +35,10 @@ class AddTodo extends React.Component {
      * 添加新任务
      */
     addTask = () => {
-        const { value } = this.state
+        const { value, endDate, endTime } = this.state
         if (!value.trim()) return; //不允许添加空白任务
 
-        this.props.onAdd(value);  //发出添加任务的action
+        this.props.onAdd(value, endDate, endTime);  //发出添加任务的action
 
         this.setState({ //添加任务后，输入框清空
             value: '',
@@ -49,8 +51,10 @@ class AddTodo extends React.Component {
                 <Header className='nav'>
                     <label className='nav__logo'>❤ TodoList</label>
 
-                    <DatePicker  className='nav__date' format={dateFormat} />
-                    <TimePicker  className='nav__time' format={format} />
+                    <DatePicker className='nav__date' format={dateFormat}
+
+                    />
+                    <TimePicker className='nav__time' format={format} />
 
                     <div className='nav__input'>
                         <Search
@@ -81,8 +85,8 @@ AddTodo.propTypes = {
  */
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAdd: (text) => {    //将addTodo这个action 作为 props 绑定到组件中
-            dispatch(actions.addTodo(text))
+        onAdd: (text, endDate, endTime) => {    //将addTodo这个action 作为 props 绑定到组件中
+            dispatch(actions.addTodo(text, endDate, endTime))
         }
     }
 }

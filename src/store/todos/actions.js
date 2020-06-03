@@ -1,16 +1,17 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from './actionTypes.js';
 
-
 let nextTaskId = 0;
 
 /**
  * 添加新任务
  * @param {text} 新增任务的文案 
  */
-export const addTodo = (text) => ({
+export const addTodo = (text,endDate,endTime) => ({
     type: ADD_TODO,
     id: nextTaskId++,
-    text: text
+    text: text,
+    endDate:endDate,
+    endTime:endTime
 })
 
 /**
