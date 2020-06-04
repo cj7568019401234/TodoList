@@ -21,6 +21,16 @@ class AddTodo extends React.Component {
         endTime: '',
     }
 
+     /**
+     * 处理导航栏的日期选择器的变化
+     *  @param {e} 发生点击事件的Event对象
+     */
+    handleDatePicker = (e) => {
+        this.setState({
+            endDate: e.target.endDate,
+        })
+    }
+
     /**
      * 处理导航栏的输入框内容发生变化
      *  @param {e} 发生点击事件的Event对象
@@ -52,7 +62,7 @@ class AddTodo extends React.Component {
                     <label className='nav__logo'>❤ TodoList</label>
 
                     <DatePicker className='nav__date' format={dateFormat}
-
+                    onChange={this.handleDatePicker}
                     />
                     <TimePicker className='nav__time' format={format} />
 

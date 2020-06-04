@@ -46,6 +46,8 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                                     id={item.id}
                                     text={item.text}
                                     isFinished={item.isFinished}
+                                    endDate={item.endDate}
+                                    endTime={item.emdTime}
                                 />
                             ))
                         ) : (

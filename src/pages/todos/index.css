@@ -18,6 +18,7 @@ body {
   text-align: center;
 }
 .nav__logo {
+  margin-right: 100px;
   color: #faebd7;
   font: bold 28px/1 sans-serif;
   vertical-align: middle;
@@ -26,12 +27,9 @@ body {
   margin-left: 10px;
   padding: 4px;
 }
-.nav__date .ant-picker-input > input::-webkit-input-placeholder {
-  content: "0--------";
-}
 .nav__input {
   display: inline-block;
-  width: 300px;
+  width: 280px;
   margin-left: 10px;
 }
 .nav__input .ant-input-group-wrapper {
@@ -71,7 +69,9 @@ body {
   vertical-align: middle;
 }
 .item__text {
-  margin-left: 8px;
+  display: inline-block;
+  margin: 0 22px 0 8px;
+  box-sizing: border-box;
   vertical-align: middle;
 }
 

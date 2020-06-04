@@ -22,6 +22,7 @@ body {
     text-align: center;
 
     &__logo {
+        margin-right: 100px;
         color: $bright-background-color;
         font: bold 28px/1 sans-serif;
         vertical-align: middle;
@@ -32,16 +33,9 @@ body {
         padding: 4px;
     }
 
-    &__date {
-        .ant-picker-input > input::-webkit-input-placeholder{
-                // color:#fff;
-                content: '0--------';
-            
-        }
-    }
     &__input {
         display: inline-block;
-        width: 300px;
+        width: 280px;
         margin-left: 10px;
 
         .ant-input-group-wrapper {
@@ -89,7 +83,10 @@ body {
     }
 
     &__text {
-        margin-left: 8px;
+        display: inline-block;
+        margin: 0 22px 0 8px;
+        box-sizing: border-box;
+        // width:100%;
         vertical-align: middle;
     }
 }

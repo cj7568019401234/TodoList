@@ -11,11 +11,14 @@ import '../index.css';
  */
 class Item extends React.Component {
     render() {
-        const { id, text, isFinished, onToggle, onDelete } = this.props;
+        console.log(this.props)
+        const { id, text, endDate, endTime, isFinished, onToggle, onDelete } = this.props;
         return (
             < div className="item-container" key={id} >
                 <Checkbox className="item__check" onChange={onToggle} checked={isFinished ? 'checked' : ''} />
                 <label className="item__text">{text}</label>
+                <label className="item__text">{endDate}</label>
+                <label className="item__text">{endTime}</label>
                 <DeleteOutlined className="btn__del" onClick={onDelete} />
                 <Divider dashed />
             </div >
