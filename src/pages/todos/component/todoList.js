@@ -22,15 +22,11 @@ const TodoList = ({ unfinishedList, finishedList }) => {
             <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
 
-    let activeKeys = finishedList.length>0? ['1','2'] : ['1']    
-
-    console.log(activeKeys)
     return (
         <div>
             <div className='task-container'>
-                <Collapse defaultActiveKey={'1'} activeKey={activeKeys}>
+                <Collapse defaultActiveKey={['1','2']} >
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>
-
                         {unfinishedList.length ? (
                             unfinishedList.map((item) => (
                                 <Item
