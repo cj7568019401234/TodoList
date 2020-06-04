@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Layout, Input, DatePicker, TimePicker } from 'antd';
 import { actions } from '../../../store/todos/index';
-import moment from 'moment';
 import '../index.css';
 
 
 const { Header } = Layout;
 const { Search } = Input;
-const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD';
 const format = 'HH:mm';
 
@@ -21,15 +19,23 @@ class AddTodo extends React.Component {
         endTime: '',
     }
 
-     /**
-     * 处理导航栏的日期选择器的变化
-     *  @param {e} 发生点击事件的Event对象
-     */
-    handleDatePicker = (e) => {
-        this.setState({
-            endDate: e.target.endDate,
-        })
+    /**
+    * 处理导航栏的日期选择器的变化
+    *  @param {value} Moment对象
+    *  @param {dateString} 格式化后的被选择日期
+    */
+    handleDatePicker = (value, dateString) => {
+        this.setState({ endDate: dateString })
     }
+
+    /**
+    * 处理导航栏的时间选择器的变化
+    *  @param {time} Moment对象
+    *  @param {timeString} 格式化后的被选择时间
+    */
+    handleTimePicker = (time, timeString) => {
+        this.setState({ endTime: timeString });
+    };
 
     /**
      * 处理导航栏的输入框内容发生变化
@@ -47,9 +53,7 @@ class AddTodo extends React.Component {
     addTask = () => {
         const { value, endDate, endTime } = this.state
         if (!value.trim()) return; //不允许添加空白任务
-
         this.props.onAdd(value, endDate, endTime);  //发出添加任务的action
-
         this.setState({ //添加任务后，输入框清空
             value: '',
         });
@@ -60,12 +64,18 @@ class AddTodo extends React.Component {
             <Layout>
                 <Header className='nav'>
                     <label className='nav__logo'>❤ TodoList</label>
-
-                    <DatePicker className='nav__date' format={dateFormat}
-                    onChange={this.handleDatePicker}
+                    <DatePicker
+                        className='nav__date'
+                        format={dateFormat}
+                        placeholder="请选择截止日期"
+                        onChange={this.handleDatePicker}
                     />
-                    <TimePicker className='nav__time' format={format} />
-
+                    <TimePicker
+                        className='nav__time'
+                        placeholder="请选择截止时间"
+                        onChange={this.handleTimePicker}
+                        format={format}
+                    />
                     <div className='nav__input'>
                         <Search
                             placeholder="请输入任务"

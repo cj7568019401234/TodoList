@@ -15,14 +15,6 @@ const { Panel } = Collapse;
  */
 const TodoList = ({ unfinishedList, finishedList }) => {
 
-    // const state = {
-    //     expandIconPosition: 'left',
-    // };
-
-    // const onPositionChange = expandIconPosition => {
-    //     this.setState({ expandIconPosition });
-    // };
-
     const genExtra = (type) => (    //任务列表右上角的任务数量
         type === 'unfinished' ?
             <Statistic value={unfinishedList.length} prefix={<SmileOutlined />} />
@@ -30,24 +22,24 @@ const TodoList = ({ unfinishedList, finishedList }) => {
             <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
 
+    let activeKeys = finishedList.length>0? ['1','2'] : ['1']    
 
-
+    console.log(activeKeys)
     return (
         <div>
             <div className='task-container'>
-                <Collapse
-                    defaultActiveKey={['1']}
-                >
+                <Collapse defaultActiveKey={'1'} activeKey={activeKeys}>
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>
 
                         {unfinishedList.length ? (
                             unfinishedList.map((item) => (
                                 <Item
+                                    key={item.id}
                                     id={item.id}
                                     text={item.text}
                                     isFinished={item.isFinished}
                                     endDate={item.endDate}
-                                    endTime={item.emdTime}
+                                    endTime={item.endTime}
                                 />
                             ))
                         ) : (
@@ -59,9 +51,12 @@ const TodoList = ({ unfinishedList, finishedList }) => {
                         {finishedList.length ? (
                             finishedList.map((item) => (
                                 <Item
+                                    key={item.id}
                                     id={item.id}
                                     text={item.text}
                                     isFinished={item.isFinished}
+                                    endDate={item.endDate}
+                                    endTime={item.endTime}
                                 />
                             ))
                         ) : (

@@ -6,11 +6,9 @@ import store from './store/index.js'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <TodoApp />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>,
   document.getElementById('root')
 );
 

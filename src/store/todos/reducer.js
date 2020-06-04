@@ -11,8 +11,8 @@ export default (state = [], action) => {
                         id: action.id,
                         text: action.text,
                         isFinished: false, //新增任务的初始状态为未完成
+                        endTime: action.endTime,
                         endDate: action.endDate,
-                        endTime: action.endTime
                     }   //新增的数据放在下面，增加任务时时页面变动小一点
                 ]
             }
