@@ -43,6 +43,12 @@ html, body {
     }
 }
 
+.ant-modal-content{
+    .ant-picker{
+        margin: 20px 20px 0 0;
+    }
+}
+
 /* 以下是主体内容样式 */
 .item {
     &-container {
@@ -71,6 +77,10 @@ html, body {
 
         .anticon{
             display: inline-block;
+        }
+
+        .ant-picker{
+            margin-right: 10px;
         }
     }
 

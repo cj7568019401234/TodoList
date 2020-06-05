@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from './actionTypes'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO } from './actionTypes'
 
 export default (state = [], action) => {
     switch (action.type) {
@@ -38,6 +38,24 @@ export default (state = [], action) => {
                 todoList: state.todoList.filter((item) => item.id !== action.id)  //直接去掉当前任务
             }
 
+        }
+        case MODIFY_TODO: { //修改任务
+            console.log(action)
+            return {
+                ...state,   //state的其他数据原样返回
+                todoList: state.todoList.map((item) => {
+                    if (item.id === action.id) {
+                        return {
+                            ...item,
+                            text: action.text,   //修改内容
+                            endDate: action.endDate, //修改结束日期
+                            endTime: action.endTime //修改结束时间
+                        }
+                    } else {
+                        return item;
+                    }
+                })
+            }
         }
         default: {
             return state;

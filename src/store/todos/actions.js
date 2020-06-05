@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from './actionTypes.js';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO } from './actionTypes.js';
 
 let nextTaskId = 0;
 
@@ -6,7 +6,7 @@ let nextTaskId = 0;
  * 添加新任务
  * @param {text} 新增任务的文案 
  */
-export const addTodo = (text,endDate,endTime) => ({
+export const addTodo = (text, endDate, endTime) => ({
     type: ADD_TODO,
     id: nextTaskId++,
     text: text,
@@ -30,4 +30,19 @@ export const toggleTodo = (id) => ({
 export const deleteTodo = (id) => ({
     type: DELETE_TODO,
     id: id
+})
+
+/**
+ * 修改任务
+ * @param {id} 任务id 
+ * @param {text} 任务内容
+ * @param {endDate} 任务结日期
+ * @param {endTime} 任务结束时间
+ */
+export const modifyTodo = (id ,text, endDate, endTime) => ({
+    type : MODIFY_TODO,
+    id: id,
+    text: text,
+    endDate: endDate,
+    endTime: endTime
 })
