@@ -36,14 +36,6 @@ html, body {
 }
 
 /* 以下是主体内容样式 */
-.btn__del {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  font-size: 10px;
-  transform: translateY(-50%);
-}
-
 .item-container {
   position: relative;
   padding-top: 50px;
@@ -53,14 +45,19 @@ html, body {
   margin: 0 auto;
   border-color: #c0c0c0;
 }
+.item-container .ant-checkbox {
+  display: inline-block;
+}
 .item-container .ant-checkbox-inner {
   border-color: #808080;
 }
 .item-container .ant-checkbox-wrapper {
   position: absolute;
   top: 50%;
-  font-size: 10px;
   transform: translateY(-50%);
+}
+.item-container .anticon {
+  display: inline-block;
 }
 .item__main {
   position: absolute;
@@ -86,6 +83,13 @@ html, body {
   padding: 4px 8px 0 0;
   font-size: 8px;
   color: #ff8c00;
+}
+.item__del {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: 10px;
+  transform: translateY(-50%);
 }
 
 .task-container {
