@@ -61,22 +61,29 @@ html, body {
             border-color: #c0c0c0;
         }
 
-        .ant-checkbox{
-            display: inline-block;
-        }
-
-        .ant-checkbox-inner {
-            border-color: $grey-active-button-color;
-        }
-
         .ant-checkbox-wrapper {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+            color: #000;
+            
+            .ant-checkbox, .ant-checkbox-inner{
+                width: 14px;
+                height: 14px;
+                color: #000;
+                border-color: rgba(0, 0, 0, 0.65);
+                // border-color: $grey-active-button-color;
+            }
         }
 
         .anticon{
             display: inline-block;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-left: 22px;
+            width: 16px;
+            height: 16px;
         }
 
         .ant-picker{
@@ -85,12 +92,12 @@ html, body {
     }
 
     &__main{
+        display: inline-block;
         position: absolute;
         top: 50%;
         font-size: 10px;
         transform: translateY(-50%);
-        margin: 0 22px 0 26px;
-        display: inline-block;
+        margin: 0 22px 0 44px;
         vertical-align: middle;
 
         &__text {
@@ -100,14 +107,14 @@ html, body {
     
         &__date{
             display: inline-block;
-            padding: 4px 8px 0 0 ;
+            padding: 4px 4px 0 0 ;
             font-size: 8px;
             color: $bright-button-color;
         }
     
         &__time{
             display: inline-block;
-            padding: 4px 8px 0 0 ;
+            padding: 4px 4px 0 0 ;
             font-size: 8px;
             color: $bright-button-color;
         }

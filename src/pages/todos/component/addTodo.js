@@ -56,10 +56,14 @@ class AddTodo extends React.Component {
         this.props.onAdd(value, endDate, endTime);  //发出添加任务的action
         this.setState({ //添加任务后，输入框清空
             value: '',
+            endDate: '',
+            endTime: '',
         });
     };
 
     render() {
+        const { value, endTime } = this.state;
+        console.log(this.state);
         return (
             <Layout>
                 <Header className='nav'>
@@ -74,6 +78,7 @@ class AddTodo extends React.Component {
                         className='nav__time'
                         placeholder="请选择截止时间"
                         onChange={this.handleTimePicker}
+                        defaultPickerValue=''
                         format={format}
                     />
                     <div className='nav__input'>
@@ -82,7 +87,7 @@ class AddTodo extends React.Component {
                             enterButton="添加"
                             size="middle"
                             onChange={this.handleInput}
-                            value={this.state.value}
+                            value={value}
                             onSearch={() => this.addTask()}
                         />
                     </div>

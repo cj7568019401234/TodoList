@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Divider, Checkbox, Modal, Input, DatePicker, TimePicker } from 'antd';
+import { Divider, Checkbox, Modal, Input, DatePicker, TimePicker,Row, Col } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { actions } from '../../../store/todos/index'
@@ -84,8 +84,9 @@ class Item extends React.Component {
         const showDate = endDate ? moment(endDate, dateFormat) : '';
         const showTime = endTime ? moment(endTime, format) : '';
         return (
-            <div className="item-container" key={id} >
+            <div className="item-container" key={id} > 
                 <Checkbox className="item__check" onChange={onToggle} checked={isFinished ? 'checked' : ''} />
+                <FormOutlined onClick={this.showModal} />
                 <Modal
                     title="请编辑任务"
                     visible={this.state.visible}
@@ -113,13 +114,11 @@ class Item extends React.Component {
                         onChange={this.handleTimePicker}
                     />
                 </Modal>
-
                 <div className='item__main'>
                     <label className="item__main__text">{text}</label>
                     {endDate ? (<label className="item__main__date">{endDate}</label>) : ''}
                     {endTime ? (<label className="item__main__time">{endTime}</label>) : ''}
                 </div>
-                <FormOutlined onClick={this.showModal} />
                 <DeleteOutlined className="item__del" onClick={onDelete} />
                 <Divider dashed />
             </div >
