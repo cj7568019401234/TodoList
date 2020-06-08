@@ -11,7 +11,6 @@ const { Search } = Input;
 const dateFormat = 'YYYY/MM/DD';
 const format = 'HH:mm';
 
-
 class AddTodo extends React.Component {
     state = {
         value: '',
@@ -62,8 +61,8 @@ class AddTodo extends React.Component {
     };
 
     render() {
-        const { value, endTime } = this.state;
-        console.log(this.state);
+        const { value} = this.state;
+        console.log(this.state)
         return (
             <Layout>
                 <Header className='nav'>
@@ -76,10 +75,9 @@ class AddTodo extends React.Component {
                     />
                     <TimePicker
                         className='nav__time'
+                        format={format}
                         placeholder="请选择截止时间"
                         onChange={this.handleTimePicker}
-                        defaultPickerValue=''
-                        format={format}
                     />
                     <div className='nav__input'>
                         <Search

@@ -11,10 +11,14 @@ $grey-active-button-color: #808080;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
 }
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
 }
+
+
+
 
 /* 以下是导航栏样式 */
 .nav {
@@ -32,6 +36,10 @@ html, body {
         padding: 4px;
     }
 
+    .ant-input-group-addon {
+        z-index: 1;
+    }
+
     &__input {
         display: inline-block;
         width: 280px;
@@ -43,8 +51,8 @@ html, body {
     }
 }
 
-.ant-modal-content{
-    .ant-picker{
+.ant-modal-content {
+    .ant-picker {
         margin: 20px 20px 0 0;
     }
 }
@@ -54,10 +62,12 @@ html, body {
     &-container {
         position: relative;
         padding-top: 50px;
-        margin:0;
+        margin: 0;
+        overflow:auto;
+        *zoom: 1;
 
         .ant-divider {
-            margin:0 auto;
+            margin: 0 auto;
             border-color: #c0c0c0;
         }
 
@@ -66,17 +76,17 @@ html, body {
             top: 50%;
             transform: translateY(-50%);
             color: #000;
-            
-            .ant-checkbox, .ant-checkbox-inner{
+
+            .ant-checkbox,
+            .ant-checkbox-inner {
                 width: 14px;
                 height: 14px;
                 color: #000;
                 border-color: rgba(0, 0, 0, 0.65);
-                // border-color: $grey-active-button-color;
             }
         }
 
-        .anticon{
+        .anticon {
             display: inline-block;
             position: absolute;
             top: 50%;
@@ -86,35 +96,37 @@ html, body {
             height: 16px;
         }
 
-        .ant-picker{
+        .ant-picker {
             margin-right: 10px;
         }
     }
 
-    &__main{
+    &__main {
+        overflow:auto;
         display: inline-block;
         position: absolute;
+        clear: both;
         top: 50%;
-        font-size: 10px;
         transform: translateY(-50%);
         margin: 0 22px 0 44px;
+        font-size: 10px;
         vertical-align: middle;
 
         &__text {
             display: block;
-            line-height:1
+            line-height: 1;
         }
-    
-        &__date{
+
+        &__date {
             display: inline-block;
-            padding: 4px 4px 0 0 ;
+            padding: 4px 4px 0 0;
             font-size: 8px;
             color: $bright-button-color;
         }
-    
-        &__time{
+
+        &__time {
             display: inline-block;
-            padding: 4px 4px 0 0 ;
+            padding: 4px 4px 0 0;
             font-size: 8px;
             color: $bright-button-color;
         }
@@ -156,11 +168,12 @@ html, body {
         background-color: #a9a9a9;
 
         .ant-checkbox-checked .ant-checkbox-inner {
+            z-index:-1;
             background-color: $grey-active-button-color;
             border-color: $grey-active-button-color;
         }
 
-        label{
+        label {
             color: $grey-button-color;
         }
     }
