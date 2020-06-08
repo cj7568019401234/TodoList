@@ -1,0 +1,95 @@
+$modal-mask-bg: rgba(0, 0, 0, 0.45);
+$modal-color: rgba(0, 0, 0, 0.65);
+$modal-line-color: #f0f0f0;
+$modal-btn-color: #d9d9d9;
+$modal-btn-bg: #1890ff;
+
+.modal {
+    position: relative;
+    top: 100px;
+    width: auto;
+    margin: 0 auto;
+    padding-bottom: 24px;
+    z-index: 2000;
+
+    &__wrapper {
+        width: 520px;
+        height: 200px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+    }
+
+    &__title {
+        margin: 0;
+        font-weight: 500;
+        line-height: 22px;
+        font-size: 16px;
+        word-wrap: break-word;
+    }
+
+    &__mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        background-color: $modal-mask-bg;
+        // opacity: 0.6;
+        z-index: 1000;
+    }
+
+    &__header {
+        padding: 16px 24px;
+        color: $modal-color;
+        background: #fff;
+        border-bottom: 1px solid $modal-line-color;
+        border-radius: 2px 2px 0 0;
+    }
+
+    &__body {
+        padding: 24px;
+        font-size: 14px;
+        line-height: 1.5715;
+        word-wrap: break-word;
+        color: $modal-color;
+        background: #fff;
+        border-bottom: 1px solid $modal-line-color;
+    }
+
+    &__footer {
+        padding: 10px 16px;
+        text-align: right;
+        color: $modal-color;
+        background: #fff;
+        border-radius: 0 0 2px 2px;
+
+        button + button {
+            margin-left: 8px;
+        }
+    }
+
+    &__container {
+        color: white;
+    }
+
+    &__btn {
+        display: inline-block;
+        height: 30px;
+        padding: 4px 15px;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 2px;
+        background: #fff;
+        border: 1px solid $modal-btn-color;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+        cursor: pointer;
+
+        &--confirm {
+            color: white;
+            background-color: $modal-btn-bg;
+            border-color: $modal-btn-bg;
+        }
+    }
+}

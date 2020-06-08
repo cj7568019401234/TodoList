@@ -12,14 +12,16 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "^3.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "typescript": "^3.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src\\pages\\todos\\index.scss src\\pages\\todos\\index.css --no-source-map"
+    "sass": "sass --watch src\\pages\\todos\\index.scss src\\pages\\todos\\index.css --no-source-map",
+    "sass-modal": "sass --watch src\\components\\modal\\index.scss src\\components\\modal\\index.css --no-source-map"
   },
   "eslintConfig": {
     "extends": "react-app"

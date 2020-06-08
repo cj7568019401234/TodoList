@@ -5,6 +5,9 @@ import { Collapse, Statistic, Empty } from 'antd';
 import { SmileOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import Item from './item.js';
 import '../index.css';
+import Modal from '../../../components/modal'
+
+
 
 const { Panel } = Collapse;
 
@@ -24,6 +27,8 @@ const TodoList = ({ unfinishedList, finishedList }) => {
 
     return (
         <div>
+             <Modal />   
+
             <div className='task-container'>
                 <Collapse defaultActiveKey={['1','2']} >
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>
