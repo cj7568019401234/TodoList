@@ -25,14 +25,16 @@ const TodoList = ({ unfinishedList, finishedList }) => {
             <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
 
-    const isVisible = false;
+    const isVisible = true;
 
     return (
-       
         <div>
-
             <Modal 
-                visible={false}
+                visible={isVisible}
+                title="请编辑任务"
+                cancelText='Cencel'
+                okText='Confirm'
+                width={780}
             />   
 
             <div className='task-container'>

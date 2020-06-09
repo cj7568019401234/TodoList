@@ -8,7 +8,7 @@ function TodoApp() {
             <AddTodo />
             <TodoList />
             <footer>
-                <p>Copyright © 2020 ToDoList. Posted by : Cj</p>
+                <p>Copyright © 2020 TodoList. Posted by : Cj</p>
             </footer>
         </div>
     );

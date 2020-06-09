@@ -53,11 +53,11 @@ $modal-btn-bg: #1890ff;
         bottom: 0;
         height: 100%;
         background-color: $modal-mask-bg;
-        // opacity: 0.6;
         z-index: 1000;
     }
 
     &__header {
+        height:54px;
         padding: 16px 24px;
         color: $modal-color;
         background: #fff;

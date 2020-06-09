@@ -92,6 +92,7 @@ class Item extends React.Component {
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
+                    width={1000}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"
