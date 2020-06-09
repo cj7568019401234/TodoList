@@ -25,9 +25,15 @@ const TodoList = ({ unfinishedList, finishedList }) => {
             <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
 
+    const isVisible = false;
+
     return (
+       
         <div>
-             <Modal />   
+
+            <Modal 
+                visible={false}
+            />   
 
             <div className='task-container'>
                 <Collapse defaultActiveKey={['1','2']} >

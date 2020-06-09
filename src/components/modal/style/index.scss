@@ -5,19 +5,18 @@ $modal-btn-color: #d9d9d9;
 $modal-btn-bg: #1890ff;
 
 .modal {
-    position: relative;
-    top: 100px;
-    width: auto;
-    margin: 0 auto;
-    padding-bottom: 24px;
-    z-index: 2000;
+    // position: relative;
+    // padding-bottom: 24px;
+    // z-index: 2000;
 
     &__wrapper {
         width: 520px;
         height: 200px;
-        position: fixed;
-        top: 0;
+        position: relative;
+        top: 100px;
+        margin: 0 auto;
         bottom: 0;
+        z-index: 2000;
     }
 
     &__title {
@@ -27,6 +26,24 @@ $modal-btn-bg: #1890ff;
         font-size: 16px;
         word-wrap: break-word;
     }
+
+    &__close{
+        position: absolute;
+        top:0;
+        right: 0;
+        width: 54px;
+        height: 54px;
+        line-height: 54px;
+        text-align: center;
+
+        &__x{
+            width: 14px;
+            height: 14px;
+            background:url(../style/close.png) no-repeat;
+            border: 0;
+        }
+    }
+
 
     &__mask {
         position: fixed;

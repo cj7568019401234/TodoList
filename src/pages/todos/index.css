@@ -81,10 +81,8 @@ body {
   margin-right: 10px;
 }
 .item__main {
-  overflow: auto;
   display: inline-block;
   position: absolute;
-  clear: both;
   top: 50%;
   transform: translateY(-50%);
   margin: 0 22px 0 44px;

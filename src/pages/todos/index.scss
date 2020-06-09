@@ -63,7 +63,7 @@ body {
         position: relative;
         padding-top: 50px;
         margin: 0;
-        // overflow:auto;
+        overflow:auto;
         *zoom: 1;
 
         .ant-divider {
@@ -102,7 +102,7 @@ body {
     }
 
     &__main {
-        overflow:auto;
+        // overflow:auto;
         display: inline-block;
         position: absolute;
         // clear: both;
