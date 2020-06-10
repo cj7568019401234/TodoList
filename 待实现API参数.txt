@@ -1,4 +1,3 @@
-	API#
 	参数	说明	类型	默认值
 	afterClose	Modal 完全关闭后的回调	function	-
 	bodyStyle	Modal body 样式	object	{}
@@ -12,9 +11,9 @@ ok	cancelText	取消按钮文字	string|ReactNode	取消
 	forceRender	强制渲染 Modal	boolean	false
 	getContainer	指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom	HTMLElement | () => HTMLElement | Selectors | false	document.body
 	keyboard	是否支持键盘 esc 关闭	boolean	true
-	mask	是否展示遮罩	Boolean	true
+ok	mask	是否展示遮罩	Boolean	true
 	maskClosable	点击蒙层是否允许关闭	boolean	true
-	maskStyle	遮罩样式	object	{}
+ok	maskStyle	遮罩样式	object	{}
 ok	okText	确认按钮文字	string|ReactNode	确定
 	okType	确认按钮类型	string	primary
 	okButtonProps	ok 按钮 props	ButtonProps	-
@@ -24,6 +23,6 @@ ok	title	标题	string|ReactNode	-
 ok	visible	对话框是否可见	boolean	-
 ok	width	宽度	string|number	520
 	wrapClassName	对话框外层容器的类名	string	-
-	zIndex	设置 Modal 的 z-index	Number	1000
-	onCancel	点击遮罩层或右上角叉或取消按钮的回调	function(e)	-
-	onOk	点击确定回调
+ok	zIndex	设置 Modal 的 z-index	Number	1000
+ok	onCancel	点击遮罩层或右上角叉或取消按钮的回调	function(e)	-
+ok	onOk	点击确定回调

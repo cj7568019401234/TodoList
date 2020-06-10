@@ -7,6 +7,7 @@ import moment from 'moment';
 import { actions } from '../../../store/todos/index'
 import Modal from '../../../components/modal/index'
 import '../index.css';
+import PickerButton from 'antd/lib/date-picker/PickerButton';
 
 const { TextArea } = Input;
 const dateFormat = 'YYYY/MM/DD';
@@ -16,7 +17,6 @@ const format = 'HH:mm';
  * 单个任务组件
  */
 class Item extends React.Component {
-
     state = {
         visible: false,
         text: this.props.text,
@@ -79,20 +79,30 @@ class Item extends React.Component {
         });
     };
 
+
+    maskStyle = {
+        backgroundColor: 'pink',
+        opacity:0.6,
+        zIndex: 1000,
+    }
+
     render() {
         const { id, text, endDate, endTime, isFinished, onToggle, onDelete } = this.props;
         const showDate = endDate ? moment(endDate, dateFormat) : '';
         const showTime = endTime ? moment(endTime, format) : '';
         return (
-            <div className="item-container clearfix" key={id} > 
+            <div className="item-container" key={id} > 
                 <Checkbox className="item__check" onChange={onToggle} checked={isFinished ? 'checked' : ''} />
-                <FormOutlined onClick={this.showModal} />
+                <FormOutlined className='item__edit' onClick={this.showModal} />
                 <Modal
                     title="请编辑任务"
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    // width={1000}
+                    width={600}
+                    mask={true}
+                    maskStyle={this.maskStyle}
+                    zIndex={2000}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"
@@ -101,14 +111,12 @@ class Item extends React.Component {
                         value={this.state.text}
                     />
                     <DatePicker
-                        className='nav__date'
                         placeholder="请选择截止日期"
                         defaultValue={showDate}
                         format={dateFormat}
                         onChange={this.handleDatePicker}
                     />
                     <TimePicker
-                        className='nav__time'
                         placeholder="请选择截止时间"
                         defaultValue={showTime}
                         format={format}

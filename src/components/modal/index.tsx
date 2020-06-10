@@ -4,39 +4,39 @@ import "./style/index.css";
 
 const Modal = (props: ModalProps) => {
     const {
-        visible,    //控制显示或隐藏
+        visible,    //控制显示或隐藏    Boolean     默认：false
+        children,   //用户自定义传入的内容  React.ReactChild | React.ReactChildren |  React.ReactElement[]
         width,      //宽度  string|number	默认：520
         title,      //标题  string|ReactNode
-        cancelText,  //取消按钮文字 
+        cancelText,  //取消按钮文字     string|ReactNode	默认：取消      
         okText,     //确认按钮文字  string|ReactNode	默认：确定
         mask,       //是否展示遮罩	Boolean	 默认：true
+        maskStyle,  //遮罩样式	object	默认：{}
         onCancel,   //点击遮罩层或右上角叉或取消按钮的回调	function(e)
-        getContainer,
+        onOk,       //点击确定回调	function(e)
+        zIndex,     //设置 Modal 的 z-index	Number	默认：1000
     } = props;
 
     const style = {
         width: width,
+        zIndex: zIndex,
     }
-
-    // console.log(props);
 
     return visible &&
         (
             <div className='modal'>
-                <div className='modal__mask'></div>
-                {/* <div className='modal__wrapper' style={style}> */}
-                <div className='modal__wrapper'>
+                {mask ? <div className='modal__mask' style={maskStyle}></div> : ''}
+                <div className='modal__wrapper' style={style}>
                     <div className='modal__close'>
-                        <button className='modal__close__x'></button>
+                        <button className='modal__close__x' onClick={onCancel}></button>
                     </div>
                     <div className='modal__header'>
                         <span className='modal__title'>{title}</span>
                     </div>
-                    {/* <div className='modal__body'>{getContainer}</div> */}
-                    <div className='modal__body'>body</div>
+                    <div className='modal__body'>{children}</div>
                     <div className='modal__footer'>
                         <button className='modal__btn' onClick={onCancel}>{cancelText}</button>
-                        <button className='modal__btn modal__btn--confirm'>{okText}</button>
+                        <button className='modal__btn modal__btn--confirm' onClick={onOk}>{okText}</button>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,9 @@ Modal.defaultProps = {
     visible: false, //控制显示或隐藏
     okText: '确定',  //确认按钮文字
     cancelText: '取消',  //取消按钮文字
-    getContainer: document.body, //指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom
+    mask: true,     //是否展示遮罩
+    zIndex: 1000,   //设置 Modal 的 z-index
+    // getContainer: document.body, //指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom
 };
 
 export default Modal;

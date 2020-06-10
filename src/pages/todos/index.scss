@@ -49,9 +49,7 @@ body {
 }
 
 .ant-modal-content {
-    .ant-picker {
-        margin: 20px 20px 0 0;
-    }
+
 }
 
 /* 以下是主体内容样式 */
@@ -83,18 +81,8 @@ body {
             }
         }
 
-        .anticon {
-            display: inline-block;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            margin-left: 22px;
-            width: 16px;
-            height: 16px;
-        }
-
         .ant-picker {
-            margin-right: 10px;
+            margin: 20px 20px 0 0;
         }
     }
 
@@ -102,7 +90,6 @@ body {
         // overflow:auto;
         // display: inline-block;
         position: absolute;
-        // clear: both;
         top: 50%;
         transform: translateY(-50%);
         margin: 0 22px 0 44px;
@@ -129,6 +116,16 @@ body {
         }
     }
 
+    &__edit{
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 22px;
+        width: 16px;
+        height: 16px;
+    }
+    
     &__del {
         position: absolute;
         top: 50%;
