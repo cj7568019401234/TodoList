@@ -62,7 +62,6 @@ class AddTodo extends React.Component {
 
     render() {
         const { value} = this.state;
-        console.log(this.state)
         return (
             <Layout>
                 <Header className='nav'>

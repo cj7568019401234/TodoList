@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Divider, Checkbox, Modal, Input, DatePicker, TimePicker} from 'antd';
+import { Divider, Checkbox, Input, DatePicker, TimePicker} from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { actions } from '../../../store/todos/index'
+import Modal from '../../../components/modal/index'
 import '../index.css';
 
 const { TextArea } = Input;
@@ -65,7 +66,6 @@ class Item extends React.Component {
      */
     handleOk = e => {
         const { text, endDate, endTime } = this.state
-        console.log('handleok',this.state);
         this.props.onModify(text, endDate, endTime);
         this.setState({
             visible: false,
@@ -92,7 +92,7 @@ class Item extends React.Component {
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    width={1000}
+                    // width={1000}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"

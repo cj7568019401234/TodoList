@@ -5,9 +5,6 @@ import { Collapse, Statistic, Empty } from 'antd';
 import { SmileOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import Item from './item.js';
 import '../index.css';
-import Modal from '../../../components/modal'
-
-
 
 const { Panel } = Collapse;
 
@@ -25,18 +22,8 @@ const TodoList = ({ unfinishedList, finishedList }) => {
             <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
 
-    const isVisible = true;
-
     return (
         <div>
-            <Modal 
-                visible={isVisible}
-                title="请编辑任务"
-                cancelText='Cencel'
-                okText='Confirm'
-                width={780}
-            />   
-
             <div className='task-container'>
                 <Collapse defaultActiveKey={['1','2']} >
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>

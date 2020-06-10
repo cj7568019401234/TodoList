@@ -17,9 +17,6 @@ body {
     height: 100%;
 }
 
-
-
-
 /* 以下是导航栏样式 */
 .nav {
     text-align: center;
@@ -103,7 +100,7 @@ body {
 
     &__main {
         // overflow:auto;
-        display: inline-block;
+        // display: inline-block;
         position: absolute;
         // clear: both;
         top: 50%;

@@ -40,7 +40,6 @@ export default (state = [], action) => {
 
         }
         case MODIFY_TODO: { //修改任务
-            console.log(action)
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: state.todoList.map((item) => {

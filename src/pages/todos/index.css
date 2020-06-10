@@ -81,7 +81,6 @@ body {
   margin-right: 10px;
 }
 .item__main {
-  display: inline-block;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

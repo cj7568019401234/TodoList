@@ -38,7 +38,7 @@ export interface ModalProps {
     maskTransitionName?: string;
     transitionName?: string;
     className?: string;
-    // getContainer?: string | HTMLElement | getContainerFunc | false | null;
+    getContainer?: string | HTMLElement | getContainerFunc | false | null;
     zIndex?: number;
     bodyStyle?: React.CSSProperties;
     maskStyle?: React.CSSProperties;
@@ -48,3 +48,5 @@ export interface ModalProps {
     prefixCls?: string;
     closeIcon?: React.ReactNode;
   }
+
+  type getContainerFunc = () => HTMLElement;
