@@ -18,7 +18,7 @@ ok	okText	确认按钮文字	string|ReactNode	确定
 	okType	确认按钮类型	string	primary
 	okButtonProps	ok 按钮 props	ButtonProps	-
 	cancelButtonProps	cancel 按钮 props	ButtonProps	-
-	style	可用于设置浮层的样式，调整浮层位置等	CSSProperties	-
+ok	style	可用于设置浮层的样式，调整浮层位置等	CSSProperties	-
 ok	title	标题	string|ReactNode	-
 ok	visible	对话框是否可见	boolean	-
 ok	width	宽度	string|number	520

@@ -2,6 +2,8 @@ import React from 'react';
 import { ModalProps } from './Modal';
 import "./style/index.css";
 
+const classNames = require('classnames');
+
 const Modal = (props: ModalProps) => {
     const {
         visible,    //控制显示或隐藏    Boolean     默认：false
@@ -17,33 +19,42 @@ const Modal = (props: ModalProps) => {
         zIndex,     //设置 Modal 的 z-index	Number	默认：1000
         closable,   //是否显示右上角的关闭按钮	boolean	默认：true
         bodyStyle,  //Modal body 样式	object	默认：{}
+        afterClose, //Modal 完全关闭后的回调	function	-
+        centered,   //垂直居中展示 Modal	Boolean	    默认：false
+        style,  //可用于设置浮层的样式，调整浮层位置等	CSSProperties	-
     } = props;
 
     const wrapperStyle = {
         width: width,
         zIndex: zIndex,
+        ...style
     }
+
+    const wrapperClassname = classNames({
+        'modal__wrapper': false,
+        'modal__center': !!centered,
+    })
 
     return visible &&
         (
             <div className='modal'>
                 {mask ? <div className='modal__mask' style={maskStyle}></div> : ''}
-                <div className='modal__wrapper' style={wrapperStyle}>
+                <div className={wrapperClassname} style={wrapperStyle}>
+                    {closable ?
+                        <div className='modal__close'>
+                            <button className='modal__close__x' onClick={onCancel}></button>
+                        </div>
+                        : ''
+                    }
+                    <div className='modal__header'>
+                        <span className='modal__title'>{title}</span>
+                    </div>
                     <div className='modal__body' style={bodyStyle}>
-                        {closable ?
-                            <div className='modal__close'>
-                                <button className='modal__close__x' onClick={onCancel}></button>
-                            </div>
-                            : ''
-                        }
-                        <div className='modal__header'>
-                            <span className='modal__title'>{title}</span>
-                        </div>
-                        <div className='modal__content'>{children}</div>
-                        <div className='modal__footer'>
-                            <button className='modal__btn' onClick={onCancel}>{cancelText}</button>
-                            <button className='modal__btn modal__btn--confirm' onClick={onOk}>{okText}</button>
-                        </div>
+                        {children}
+                    </div>
+                    <div className='modal__footer'>
+                        <button className='modal__btn' onClick={onCancel}>{cancelText}</button>
+                        <button className='modal__btn modal__btn--confirm' onClick={onOk}>{okText}</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +69,7 @@ Modal.defaultProps = {
     mask: true,     //是否展示遮罩
     zIndex: 1000,   //设置 Modal 的 z-index
     closable: true, //是否显示右上角的关闭按钮
+    centered: false,    //垂直居中展示 Modal
     // getContainer: document.body, //指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom
 };
 

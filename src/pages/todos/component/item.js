@@ -88,7 +88,8 @@ class Item extends React.Component {
     }
 
     bodyStyle = {
-        margin: '100px',
+        // margin: '200px',
+        color:'pink',
     }
 
     render() {
@@ -109,7 +110,9 @@ class Item extends React.Component {
                     maskStyle={this.maskStyle}
                     zIndex={2000}
                     closable={true}
+                    centered={true}
                     // bodyStyle={this.bodyStyle}
+                    // style={this.bodyStyle}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"
