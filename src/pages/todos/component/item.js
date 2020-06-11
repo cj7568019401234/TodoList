@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Divider, Checkbox, Input, DatePicker, TimePicker} from 'antd';
+import { Divider, Checkbox, Input, DatePicker, TimePicker } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { actions } from '../../../store/todos/index'
 import Modal from '../../../components/modal/index'
 import '../index.css';
-import PickerButton from 'antd/lib/date-picker/PickerButton';
+// import PickerButton from 'antd/lib/date-picker/PickerButton';
 
 const { TextArea } = Input;
 const dateFormat = 'YYYY/MM/DD';
@@ -49,6 +49,7 @@ class Item extends React.Component {
     *  @param {dateString} 格式化后的被选择日期
     */
     handleDatePicker = (value, dateString) => {
+        console.log(dateString);
         this.setState({ endDate: dateString })
     }
 
@@ -58,6 +59,7 @@ class Item extends React.Component {
     *  @param {timeString} 格式化后的被选择时间
     */
     handleTimePicker = (time, timeString) => {
+        console.log(timeString);
         this.setState({ endTime: timeString });
     };
 
@@ -79,11 +81,14 @@ class Item extends React.Component {
         });
     };
 
-
     maskStyle = {
         backgroundColor: 'pink',
-        opacity:0.6,
+        opacity: 0.6,
         zIndex: 1000,
+    }
+
+    bodyStyle = {
+        margin: '100px',
     }
 
     render() {
@@ -91,7 +96,7 @@ class Item extends React.Component {
         const showDate = endDate ? moment(endDate, dateFormat) : '';
         const showTime = endTime ? moment(endTime, format) : '';
         return (
-            <div className="item-container" key={id} > 
+            <div className="item-container" key={id} >
                 <Checkbox className="item__check" onChange={onToggle} checked={isFinished ? 'checked' : ''} />
                 <FormOutlined className='item__edit' onClick={this.showModal} />
                 <Modal
@@ -103,6 +108,8 @@ class Item extends React.Component {
                     mask={true}
                     maskStyle={this.maskStyle}
                     zIndex={2000}
+                    closable={true}
+                    // bodyStyle={this.bodyStyle}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"
@@ -125,8 +132,8 @@ class Item extends React.Component {
                 </Modal>
                 <div className='item__main'>
                     <label className="item__main__text">{text}</label>
-                    {endDate ? (<label className="item__main__date">{endDate}</label>) : ''}
-                    {endTime ? (<label className="item__main__time">{endTime}</label>) : ''}
+                    {endDate ? <label className="item__main__date">{endDate}</label> : ''}
+                    {endTime ? <label className="item__main__time">{endTime}</label> : ''}
                 </div>
                 <DeleteOutlined className="item__del" onClick={onDelete} />
                 <Divider dashed />
@@ -159,7 +166,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onToggle: () => dispatch(actions.toggleTodo(id)),
         onDelete: () => dispatch(actions.deleteTodo(id)),
-        onModify: (text, endDate, endTime) => dispatch(actions.modifyTodo(id, text, endDate, endTime)) 
+        onModify: (text, endDate, endTime) => dispatch(actions.modifyTodo(id, text, endDate, endTime))
         //text, endDate, endTime需要传本地的
     }
 };

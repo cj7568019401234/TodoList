@@ -32,15 +32,6 @@ $modal-btn-bg: #1890ff;
         z-index: 1000;
     }
 
-    &__header {
-        height:54px;
-        padding: 16px 24px;
-        color: $modal-color;
-        background: #fff;
-        border-bottom: 1px solid $modal-line-color;
-        border-radius: 2px 2px 0 0;
-    }
-
     &__title {
         margin: 0;
         font-weight: 500;
@@ -66,7 +57,11 @@ $modal-btn-bg: #1890ff;
         }
     }
 
-    &__body {
+    &__body{
+        position: relative;
+    }
+
+    &__content {
         padding: 24px;
         font-size: 14px;
         line-height: 1.5715;
@@ -74,6 +69,15 @@ $modal-btn-bg: #1890ff;
         color: $modal-color;
         background: #fff;
         border-bottom: 1px solid $modal-line-color;
+    }
+
+    &__header{
+        height:54px;
+        padding: 16px 24px;
+        color: $modal-color;
+        background: #fff;
+        border-bottom: 1px solid $modal-line-color;
+        border-radius: 2px 2px 0 0;
     }
 
     &__footer {
