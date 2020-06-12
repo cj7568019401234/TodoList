@@ -30,31 +30,36 @@ const Modal = (props: ModalProps) => {
         ...style
     }
 
-    const wrapperClassname = classNames({
-        'modal__wrapper': false,
+    const wrapperClass = classNames({
+        'modal__wrapper': !centered,
         'modal__center': !!centered,
+    })
+
+    const containerClass = classNames({
+        'modal__container': true,
     })
 
     return visible &&
         (
             <div className='modal'>
-                {mask ? <div className='modal__mask' style={maskStyle}></div> : ''}
-                <div className={wrapperClassname} style={wrapperStyle}>
-                    {closable ?
-                        <div className='modal__close'>
-                            <button className='modal__close__x' onClick={onCancel}></button>
+                <div className={containerClass} >
+                    {mask && <div className='modal__mask' style={maskStyle}></div>}
+                    <div className={wrapperClass}  style={wrapperStyle}>
+                        {closable && (
+                            <div className='modal__close'>
+                                <button className='modal__close__x' onClick={onCancel}></button>
+                            </div>
+                        )}
+                        <div className='modal__header'>
+                            <span className='modal__title'>{title}</span>
                         </div>
-                        : ''
-                    }
-                    <div className='modal__header'>
-                        <span className='modal__title'>{title}</span>
-                    </div>
-                    <div className='modal__body' style={bodyStyle}>
-                        {children}
-                    </div>
-                    <div className='modal__footer'>
-                        <button className='modal__btn' onClick={onCancel}>{cancelText}</button>
-                        <button className='modal__btn modal__btn--confirm' onClick={onOk}>{okText}</button>
+                        <div className='modal__body' style={bodyStyle}>
+                            {children}
+                        </div>
+                        <div className='modal__footer'>
+                            <button className='modal__btn' onClick={onCancel}>{cancelText}</button>
+                            <button className='modal__btn modal__btn--confirm' onClick={onOk}>{okText}</button>
+                        </div>
                     </div>
                 </div>
             </div>

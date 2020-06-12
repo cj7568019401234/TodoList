@@ -12,49 +12,51 @@ html, body {
 }
 
 .modal {
-    position: relative;
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:1;
+
+    &__hidden{
+        opacity: 0;
+    }
 
     &__wrapper {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        position: fixed;
+        // -webkit-box-sizing: border-box;
+        // box-sizing: border-box;
+        position: absolute;
         top: 100px;
         right: 0;
         bottom: 0;
         left: 0;
         margin: 0 auto;
         width: 520px;
-        z-index: 1000;
+        z-index: 2000;
         overflow: auto;
         outline: 0;
         -webkit-overflow-scrolling: touch;
     }
 
     &__center{
-        // position: absolute;
-        // // left: 50%;
-        // top: 50%;
-        // -webkit-box-sizing: border-box;
-        // box-sizing: border-box;
-        // // position: fixed;
-        // top: 100px;
-        // right: 0;
-        // bottom: 0;
-        // left: 0;
-        // margin: 0 auto;
-        // width: 520px;
-        // z-index: 2000;
-        // overflow: auto;
-        // outline: 0;
-        // -webkit-overflow-scrolling: touch;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 2000;
     }
 
-    &__mask {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+    &__container{
+        position: relative;
+        width:100%;
+        height: 100%;
+        // z-index: 1000;
+    }
+
+    &__mask{
+        position: relative;
+        width:100%;
         height: 100%;
         background-color: $modal-mask-bg;
         z-index: 1000;
@@ -135,4 +137,6 @@ html, body {
             border-color: $modal-btn-bg;
         }
     }
+
+    
 }

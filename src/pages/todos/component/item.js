@@ -88,8 +88,9 @@ class Item extends React.Component {
     }
 
     bodyStyle = {
-        // margin: '200px',
-        color:'pink',
+        // margin: '20px',
+        backgroundColor:'pink',
+        // color:'pink',
     }
 
     render() {
@@ -106,7 +107,7 @@ class Item extends React.Component {
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     width={600}
-                    mask={true}
+                    // mask={true}
                     maskStyle={this.maskStyle}
                     zIndex={2000}
                     closable={true}

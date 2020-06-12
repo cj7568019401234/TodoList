@@ -6,29 +6,44 @@ html, body {
 }
 
 .modal {
-  position: relative;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.modal__hidden {
+  opacity: 0;
 }
 .modal__wrapper {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  position: fixed;
+  position: absolute;
   top: 100px;
   right: 0;
   bottom: 0;
   left: 0;
   margin: 0 auto;
   width: 520px;
-  z-index: 1000;
+  z-index: 2000;
   overflow: auto;
   outline: 0;
   -webkit-overflow-scrolling: touch;
 }
+.modal__center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+}
+.modal__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 .modal__mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.45);
   z-index: 1000;
