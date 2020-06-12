@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Divider, Checkbox, Input, DatePicker, TimePicker } from 'antd';
+import { Divider, Checkbox, Input, DatePicker, TimePicker} from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { actions } from '../../../store/todos/index'
@@ -93,6 +93,13 @@ class Item extends React.Component {
         // color:'pink',
     }
 
+    afterClose = e =>{
+        console.log('afterClose');
+        console.log(e);
+    }
+
+    closeIcon = (<span className='modal__close__x'></span>)
+
     render() {
         const { id, text, endDate, endTime, isFinished, onToggle, onDelete } = this.props;
         const showDate = endDate ? moment(endDate, dateFormat) : '';
@@ -112,8 +119,12 @@ class Item extends React.Component {
                     zIndex={2000}
                     closable={true}
                     centered={true}
+                    okType={'not'}
                     // bodyStyle={this.bodyStyle}
                     // style={this.bodyStyle}
+                    afterClose={this.afterClose}
+                    maskClosable={true}
+                    closeIcon={this.closeIcon}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"

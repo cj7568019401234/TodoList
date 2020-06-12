@@ -22,8 +22,12 @@ const Modal = (props: ModalProps) => {
         afterClose, //Modal 完全关闭后的回调	function	-
         centered,   //垂直居中展示 Modal	Boolean	    默认：false
         style,  //可用于设置浮层的样式，调整浮层位置等	CSSProperties	-
+        okType, //确认按钮类型	string	默认：primary
+        closeIcon,  //自定义关闭图标	ReactNode	-
     } = props;
 
+
+    //用户自定义的对话框样式
     const wrapperStyle = {
         width: width,
         zIndex: zIndex,
@@ -32,24 +36,49 @@ const Modal = (props: ModalProps) => {
 
     const wrapperClass = classNames({
         'modal__wrapper': !centered,
-        'modal__center': !!centered,
+        'modal__center': !!centered,    //根据用户数据选择是否居中
     })
 
     const containerClass = classNames({
         'modal__container': true,
     })
 
+    const btnClass = classNames({
+        'modal__btn': true,
+        'modal__btn--primary': okType === 'primary',    //根据用户输入选择确认按钮是否使用基础样式
+    })
+
+    const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (onCancel) {     //点击遮罩层或右上角叉或取消按钮的回调
+            onCancel(e);
+        }
+        if (afterClose) {   //Modal 完全关闭后的回调
+            afterClose();
+        }
+    };
+
+    const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (onOk) {     //点击确定回调
+            onOk(e);
+        }
+    };
+
+    let closer; //右上角关闭按钮
+    if (closable) {
+        closer = (
+            <button className='modal__close' onClick={handleCancel}>
+                {closeIcon || <span className='modal__close__x'></span>}
+            </button>
+        )
+    }
+
     return visible &&
         (
             <div className='modal'>
                 <div className={containerClass} >
                     {mask && <div className='modal__mask' style={maskStyle}></div>}
-                    <div className={wrapperClass}  style={wrapperStyle}>
-                        {closable && (
-                            <div className='modal__close'>
-                                <button className='modal__close__x' onClick={onCancel}></button>
-                            </div>
-                        )}
+                    <div className={wrapperClass} style={wrapperStyle}>
+                        {closer}
                         <div className='modal__header'>
                             <span className='modal__title'>{title}</span>
                         </div>
@@ -57,8 +86,10 @@ const Modal = (props: ModalProps) => {
                             {children}
                         </div>
                         <div className='modal__footer'>
-                            <button className='modal__btn' onClick={onCancel}>{cancelText}</button>
-                            <button className='modal__btn modal__btn--confirm' onClick={onOk}>{okText}</button>
+                            <button className='modal__btn' onClick={handleCancel}>{cancelText}</button>
+                            <button className={btnClass} onClick={handleOk}>
+                                {okText}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +106,7 @@ Modal.defaultProps = {
     zIndex: 1000,   //设置 Modal 的 z-index
     closable: true, //是否显示右上角的关闭按钮
     centered: false,    //垂直居中展示 Modal
-    // getContainer: document.body, //指定 Modal 挂载的 HTML 节点, false 为挂载在当前 dom
+    oktype: 'parimary',    //确认按钮类型
 };
 
 export default Modal;

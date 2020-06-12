@@ -23,7 +23,7 @@ export interface ModalProps {
     /** 确认按钮文字 */
     okText?: string | React.ReactNode;
     /** 确认按钮类型 */
-    // okType?: LegacyButtonType;
+    okType?: string;
     /** 取消按钮文字 */
     cancelText?: React.ReactNode;
     /** 点击蒙层是否允许关闭 */
