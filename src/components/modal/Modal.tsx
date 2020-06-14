@@ -3,8 +3,6 @@ import * as React from 'react';
 export interface ModalProps {
     /** 对话框是否可见 */
     visible?: boolean;
-    /** 确定按钮 loading */
-    confirmLoading?: boolean;
     /** 标题 */
     title?: React.ReactNode | string;
     /** 是否显示右上角的关闭按钮 */
@@ -28,27 +26,11 @@ export interface ModalProps {
     cancelText?: React.ReactNode;
     /** 点击蒙层是否允许关闭 */
     maskClosable?: boolean;
-    /** 强制渲染 Modal */
-    forceRender?: boolean;
-    // okButtonProps?: ButtonProps;
-    // cancelButtonProps?: ButtonProps;
-    destroyOnClose?: boolean;
     style?: React.CSSProperties;
-    wrapClassName?: string;
-    maskTransitionName?: string;
-    transitionName?: string;
-    className?: string;
-    getContainer?: string | HTMLElement | getContainerFunc | false | null;
     zIndex?: number;
     bodyStyle?: React.CSSProperties;
     maskStyle?: React.CSSProperties;
     mask?: boolean;
-    keyboard?: boolean;
-    wrapProps?: any;
-    prefixCls?: string;
     closeIcon?: React.ReactNode;
-    content?:React.ReactNode;
     children: React.ReactChild | React.ReactChildren |  React.ReactElement[],
   }
-
-  type getContainerFunc = () => HTMLElement;

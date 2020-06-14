@@ -17,15 +17,12 @@ ok	maskStyle	遮罩样式	object	{}
 ok	okText	确认按钮文字	string|ReactNode	确定
 ok	okType	确认按钮类型	string	primary
 ok	okButtonProps	ok 按钮 props	ButtonProps	-
-	cancelButtonProps	cancel 按钮 props	ButtonProps	-
+no	cancelButtonProps	cancel 按钮 props	ButtonProps	-
 ok	style	可用于设置浮层的样式，调整浮层位置等	CSSProperties	-
 ok	title	标题	string|ReactNode	-
 ok	visible	对话框是否可见	boolean	-
 ok	width	宽度	string|number	520
-	wrapClassName	对话框外层容器的类名	string	-
+no	wrapClassName	对话框外层容器的类名	string	-
 ok	zIndex	设置 Modal 的 z-index	Number	1000
 ok	onCancel	点击遮罩层或右上角叉或取消按钮的回调	function(e)	-
 ok	onOk	点击确定回调
-
-
-（公共问题，待铁哥团队确认）

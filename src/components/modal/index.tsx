@@ -26,9 +26,7 @@ const Modal = (props: ModalProps) => {
         closeIcon,  //自定义关闭图标	ReactNode	-
     } = props;
 
-
-    //用户自定义的对话框样式
-    const wrapperStyle = {
+    const wrapperStyle = {      //用户自定义的对话框样式
         width: width,
         zIndex: zIndex,
         ...style
@@ -37,10 +35,6 @@ const Modal = (props: ModalProps) => {
     const wrapperClass = classNames({
         'modal__wrapper': !centered,
         'modal__center': !!centered,    //根据用户数据选择是否居中
-    })
-
-    const containerClass = classNames({
-        'modal__container': true,
     })
 
     const btnClass = classNames({
@@ -52,7 +46,7 @@ const Modal = (props: ModalProps) => {
         if (onCancel) {     //点击遮罩层或右上角叉或取消按钮的回调
             onCancel(e);
         }
-        if (afterClose) {   //Modal 完全关闭后的回调
+        if (afterClose) {
             afterClose();
         }
     };
@@ -75,7 +69,7 @@ const Modal = (props: ModalProps) => {
     return visible &&
         (
             <div className='modal'>
-                <div className={containerClass} >
+                <div className='modal__container' >
                     {mask && <div className='modal__mask' style={maskStyle}></div>}
                     <div className={wrapperClass} style={wrapperStyle}>
                         {closer}
@@ -94,7 +88,7 @@ const Modal = (props: ModalProps) => {
                     </div>
                 </div>
             </div>
-        )
+        );
 }
 
 Modal.defaultProps = {
@@ -106,7 +100,8 @@ Modal.defaultProps = {
     zIndex: 1000,   //设置 Modal 的 z-index
     closable: true, //是否显示右上角的关闭按钮
     centered: false,    //垂直居中展示 Modal
-    oktype: 'parimary',    //确认按钮类型
+    okType: 'primary',    //确认按钮类型
+    maskClosable: true, //点击蒙层是否允许关闭
 };
 
 export default Modal;

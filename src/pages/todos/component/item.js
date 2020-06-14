@@ -115,16 +115,16 @@ class Item extends React.Component {
                     onCancel={this.handleCancel}
                     width={600}
                     // mask={true}
-                    maskStyle={this.maskStyle}
+                    // maskStyle={this.maskStyle}
                     zIndex={2000}
                     closable={true}
                     centered={true}
-                    okType={'not'}
+                    // okType={'not'}
                     // bodyStyle={this.bodyStyle}
                     // style={this.bodyStyle}
                     afterClose={this.afterClose}
                     maskClosable={true}
-                    closeIcon={this.closeIcon}
+                    // closeIcon={this.closeIcon}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"
