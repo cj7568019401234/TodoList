@@ -93,9 +93,8 @@ class Item extends React.Component {
         // color:'pink',
     }
 
-    afterClose = e =>{
+    afterClose = () =>{
         console.log('afterClose');
-        console.log(e);
     }
 
     closeIcon = (<span className='modal__close__x'></span>)

@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ModalProps } from './Modal';
 import "./style/index.css";
 
 const classNames = require('classnames');
 
 const Modal = (props: ModalProps) => {
+    const [isVisible, setIsVisible] = useState(true);
+
     const {
         visible,    //控制显示或隐藏    Boolean     默认：false
         children,   //用户自定义传入的内容  React.ReactChild | React.ReactChildren |  React.ReactElement[]
@@ -43,13 +45,13 @@ const Modal = (props: ModalProps) => {
     })
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
-        //点击遮罩层或右上角叉或取消按钮的回调
-        onCancel && onCancel(e);
-        afterClose && afterClose();
+        if(onCancel) onCancel(e);   //点击遮罩层或右上角叉或取消按钮的回调
+        else setIsVisible(false);   
     };
 
-    const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
-        onOk && onOk(e);    //点击确定回调
+    const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {   
+        if(onOk) onOk(e);   //点击确定回调
+        else setIsVisible(false);
     };
 
     const closer = closable ? (
@@ -58,7 +60,17 @@ const Modal = (props: ModalProps) => {
         </button>) 
         : null
 
-    return visible &&
+
+    useEffect(() =>{
+        return function cleanup() {
+            afterClose && afterClose();   
+        }
+    })   
+
+    //如果用户有输入visible则按照visible控制是否展示组件，否则使用本地isVisible控制
+    const isShow = visible === undefined ? isVisible : visible;     
+
+    return isShow &&
         (
             <div className='modal'>
                 <div className='modal__container' >
@@ -85,7 +97,6 @@ const Modal = (props: ModalProps) => {
 
 Modal.defaultProps = {
     width: 520,
-    visible: false, //控制显示或隐藏
     okText: '确定',  //确认按钮文字
     cancelText: '取消',  //取消按钮文字
     mask: true,     //是否展示遮罩
