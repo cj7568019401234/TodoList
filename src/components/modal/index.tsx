@@ -5,10 +5,9 @@ import "./style/index.css";
 const classNames = require('classnames');
 
 const Modal = (props: ModalProps) => {
-    const [isVisible, setIsVisible] = useState(true);
 
     const {
-        visible,    //控制显示或隐藏    Boolean     默认：false
+        visible = true,    //控制显示或隐藏    Boolean     默认：false
         children,   //用户自定义传入的内容  React.ReactChild | React.ReactChildren |  React.ReactElement[]
         width,      //宽度  string|number	默认：520
         title,      //标题  string|ReactNode
@@ -21,12 +20,17 @@ const Modal = (props: ModalProps) => {
         zIndex,     //设置 Modal 的 z-index	Number	默认：1000
         closable,   //是否显示右上角的关闭按钮	boolean	默认：true
         bodyStyle,  //Modal body 样式	object	默认：{}
-        afterClose, //Modal 完全关闭后的回调	function	-
+        // afterClose, //Modal 完全关闭后的回调	function	-
         centered,   //垂直居中展示 Modal	Boolean	    默认：false
         style,  //可用于设置浮层的样式，调整浮层位置等	CSSProperties	-
         okType, //确认按钮类型	string	默认：primary
         closeIcon,  //自定义关闭图标	ReactNode	-
     } = props;
+    const [isVisible, setIsVisible] = useState(true);
+    
+    useEffect(() =>{
+        setIsVisible(visible)
+     }, [visible])   
 
     const wrapperStyle = {      //用户自定义的对话框样式
         width: width,
@@ -60,17 +64,7 @@ const Modal = (props: ModalProps) => {
         </button>) 
         : null
 
-
-    useEffect(() =>{
-        return function cleanup() {
-            afterClose && afterClose();   
-        }
-    })   
-
-    //如果用户有输入visible则按照visible控制是否展示组件，否则使用本地isVisible控制
-    const isShow = visible === undefined ? isVisible : visible;     
-
-    return isShow &&
+    return isVisible &&
         (
             <div className='modal'>
                 <div className='modal__container' >

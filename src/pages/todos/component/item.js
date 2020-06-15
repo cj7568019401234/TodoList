@@ -88,9 +88,7 @@ class Item extends React.Component {
     }
 
     bodyStyle = {
-        // margin: '20px',
         backgroundColor:'pink',
-        // color:'pink',
     }
 
     afterClose = () =>{
@@ -112,17 +110,17 @@ class Item extends React.Component {
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    width={600}
+                    // width={600}
                     // mask={true}
                     // maskStyle={this.maskStyle}
-                    zIndex={2000}
-                    closable={true}
-                    centered={true}
+                    // zIndex={2000}
+                    // closable={true}
+                    // centered={true}
                     // okType={'not'}
                     // bodyStyle={this.bodyStyle}
                     // style={this.bodyStyle}
-                    afterClose={this.afterClose}
-                    maskClosable={true}
+                    // afterClose={this.afterClose}
+                    // maskClosable={true}
                     // closeIcon={this.closeIcon}
                 >
                     <TextArea rows={4}
