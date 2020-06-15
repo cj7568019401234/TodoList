@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ModalProps } from './Modal';
 import "./style/index.css";
 
@@ -43,28 +43,20 @@ const Modal = (props: ModalProps) => {
     })
 
     const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (onCancel) {     //点击遮罩层或右上角叉或取消按钮的回调
-            onCancel(e);
-        }
-        if (afterClose) {
-            afterClose();
-        }
+        //点击遮罩层或右上角叉或取消按钮的回调
+        onCancel && onCancel(e);
+        afterClose && afterClose();
     };
 
     const handleOk = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (onOk) {     //点击确定回调
-            onOk(e);
-        }
+        onOk && onOk(e);    //点击确定回调
     };
 
-    let closer; //右上角关闭按钮
-    if (closable) {
-        closer = (
-            <button className='modal__close' onClick={handleCancel}>
-                {closeIcon || <span className='modal__close__x'></span>}
-            </button>
-        )
-    }
+    const closer = closable ? (
+        <button className='modal__close' onClick={handleCancel}>
+            {closeIcon || <span className='modal__close__x'></span>}
+        </button>) 
+        : null
 
     return visible &&
         (
