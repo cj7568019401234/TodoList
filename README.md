@@ -32,5 +32,11 @@
 #### `第六版`
 分支：TodoList-v6<br>
 使用：HTML+CSS+Sass+React+Redux+**Antd**<br>
-改动：新增编辑对话框，可修改任务内容、截止日期、截止时间<br>
+改动：使用Antd新增编辑对话框，可修改任务内容、截止日期、截止时间<br>
 功能：新增修改任务功能
+
+#### `第七版`
+分支：TodoList-v7<br>
+使用：HTML+CSS+Sass+React+Redux+Antd+**Hook**<br>
+改动：自己实现编辑对话框，初次使用Hook<br>
+功能：与第六版一致
