@@ -1,28 +1,34 @@
 import React from 'react';
-import { Card, Col, Row } from 'antd';
+import { Card, Col, Row, Layout } from 'antd';
 
-function TodoApp() {
+import './todos/index.css';
+
+const { Header } = Layout;
+const { Meta } = Card;
+
+function Apps() {
     return (
         <div className="site-card-wrapper">
-            <Row gutter={16}>
-                <Col span={8}>
-                    <Card title="Card title" bordered={false}>
-                        Card content
-                    </Card>
-                </Col>
-                <Col span={8}>
-                    <Card title="Card title" bordered={false}>
-                        Card content
-                </Card>
-                </Col>
-                <Col span={8}>
-                    <Card title="Card title" bordered={false}>
-                        Card content
-                </Card>
-                </Col>
-            </Row>
+            <Layout>
+                <Header className='nav'></Header>
+            </Layout>
+            <Card
+                style={{ width: 300 }}
+                cover={
+                    <img
+                        alt="example"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    />
+                }
+            >
+                {/* <Meta
+                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    title="Card title"
+                    description="This is the description"
+                /> */}
+            </Card>
         </div>
     );
 }
 
-export default TodoApp;
+export default Apps;
