@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass --watch src\\pages\\todos\\index.scss src\\pages\\todos\\index.css --no-source-map",
-    "sass-modal": "sass --watch src\\components\\modal\\style\\index.scss src\\components\\modal\\style\\index.css --no-source-map"
+    "sass-modal": "sass --watch src\\components\\modal\\style\\index.scss src\\components\\modal\\style\\index.css --no-source-map",
+    "sass-index": "sass --watch src\\pages\\index\\style\\index.scss src\\pages\\index\\style\\index.css --no-source-map"
   },
   "eslintConfig": {
     "extends": "react-app"

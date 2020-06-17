@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Apps from './pages/index';
+import Apps from './pages/index/index';
 import 'antd/dist/antd.css'
 import store from './store/index.js'
 import * as serviceWorker from './serviceWorker';
