@@ -1,22 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { Router, Route, Link, IndexRoute } from 'react-router'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import TodoApp from './pages/todos/index'
-// import { Router, Route } from 'react-router'
+import Account from './pages/account/index'
 import Apps from './pages/index/index';
 import 'antd/dist/antd.css'
 import store from './store/index.js'
-// import { IndexRoute } from 'react-router'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Apps />
-
-    </BrowserRouter>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Apps />
+        </Route>
+        <Route path="/todo">
+          <TodoApp />
+        </Route>
+        <Route path="/account">
+          <Account />
+        </Route>
+      </Switch>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
