@@ -1,4 +1,8 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO } from './actionTypes'
+// const express = require('express');
+// const Todo = require('./db');
+// const router = express.Router();
+
 
 export default (state = [], action) => {
     switch (action.type) {
