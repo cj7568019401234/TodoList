@@ -5,7 +5,8 @@ const todoDB = new TodoDB();
 
 
 const initState = {
-    todoList: todoDB.findTodos(),
+    // todoList: todoDB.findTodos(),
+    todoList:[]
 }
 
 export default createStore(reducer, initState)
