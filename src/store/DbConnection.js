@@ -40,9 +40,13 @@
 
 // mongoose.connect(DB_URL, { useNewUrlParser: true })
 
-let mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/myapp', {useNewUrlParser: true});
 
+
+const mongoose = require('mongoose');
+// const mongoose = require('mongodb').MongoClient;
+console.log(mongoose);
+// mongoose.connect('mongodb://localhost:27017/TodoList', {useNewUrlParser: true});
+// mongoose.connect('mongodb://localhost:27017/TodoList');
 // mongoose.connection.on('connected',function() {
 //    console.log('Mongoose connection open to '+DB_URL);
 // });
