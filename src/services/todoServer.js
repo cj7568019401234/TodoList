@@ -29,7 +29,6 @@ const addNote = (title, content, tags = []) => {
 
 };
 
-
 // find notes
 
 
@@ -128,9 +127,7 @@ const updateNote = (note) => {
 
 
 // exports
-
-
-module.exports = {
+export default{
     'addNote': addNote,
     'findNote': findNote,
     'findNotesByTitle': findNotesByTitle,

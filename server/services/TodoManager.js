@@ -1,4 +1,4 @@
-const NoteRepository = require('../DataAccess/NoteRepository');
+const NoteRepository = require('../DataAccess/TodoDB');
 const assert = require('assert');
 const noteRepository = new NoteRepository();
 
@@ -104,7 +104,7 @@ class NoteManager {
     listNotes() {
         return new Promise((resolve, reject) => {
             noteRepository
-                .listNotes()
+                .findTodos()
                 .then(notes => resolve(notes.map(note => mapToNoteDto(note))))
                 .catch(error => reject(error));
         });

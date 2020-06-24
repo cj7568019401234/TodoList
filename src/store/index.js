@@ -1,12 +1,12 @@
 import { reducer } from './todos/index'
 import { createStore } from 'redux';
-const TodoService = require('../server/services/TodoManager');
+const TodoService = require('../services/todoServer');
 
+
+// console.log(TodoService.default.listNotes);
 
 // const NoteService = require('../../services/note-service');
-
-
-TodoService
+TodoService.default
     .listNotes()
     .then(notes => {
         this.setState({ notes });
@@ -16,7 +16,6 @@ TodoService
         console.log(error);
         return;
     });
-
 
 const initState = {
     todoList: []

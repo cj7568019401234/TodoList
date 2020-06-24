@@ -2,7 +2,7 @@
 const express = require('express');
 
 // app references
-const NoteManager = require('../Services/NoteManager');
+const NoteManager = require('../Services/TodoManager');
 
 // initialization
 const noteManager = new NoteManager();
