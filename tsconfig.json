@@ -20,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "src", "server/DataAccess/DataAccess.js", "server/DataAccess/DbConnection.js"
+    "src", "src/server/DataAccess/TodoDB.js", "src/server/DataAccess/DbConnection.js"
   ]
 }
