@@ -67,11 +67,11 @@ const findNotesByTitle = (title) => {
 
 };
 
-const listNotes = () => {
+const listTodos = () => {
 
     return new Promise((resolve, reject) => {
         axios
-            .get(`${baseApiUrl}/notes`)
+            .get(`${baseApiUrl}/todos`)
             .then(response => {
                 resolve(response.data);
                 return;

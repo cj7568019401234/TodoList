@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
-
-const Koa = require('koa')
-const app = new Koa()
+// const Koa = require('koa')
+// const app = new Koa()
 
 class DbConnection {
-    constructor(connectionUri) {
-        this.Uri = connectionUri;
+    constructor(collectionName) {
+        this.Uri = collectionName;
     }
 
-    open() {
-        mongoose.connect(this.Uri)
+    open() {    //连接Mongodb
+        mongoose.connect(this.Uri, { useNewUrlParser: true })
 
         return new Promise((resolve, reject) => {
             mongoose.connect(this.Uri)
                 .then(db => {
+                    console.log(db);
+
                     this.Db = db;
                     resolve();
                 })
@@ -24,7 +25,7 @@ class DbConnection {
         });
     }
 
-    close() {
+    close() {   //关闭连接
         if (this.Db) {
             this.Db.close().catch(error => console.log(error));
         }

@@ -1,10 +1,21 @@
+const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
-// const mongoose = require('mongoose');
-const DbConnection = require('./DbConnection');
 
-const collection = 'TodoList';
-
-const connect = () => new DbConnection('mongodb://127.0.0.1:27017/TodoList');
+const todoSchema = new mongoose.Schema({    //声明数据类型
+    id: Number,
+    text: String,
+    endTime: String,
+    endDate: String,
+    isFinished: Boolean,
+});
+const collectionName = 'TodoList';  //数据库名称
+todo = mongoose.model('item', todoSchema, collectionName);
+mongoose.connect(   //连接mongodb
+    'mongodb://127.0.0.1:27017/' + collectionName,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 
 const filters = {
     id: (id) => {
@@ -119,26 +130,18 @@ class TodoDB {
         });
     }
 
+    /**
+     * 查找所有TodoList
+     */
     findTodos() {
-        const connection = connect();
-
         return new Promise((resolve, reject) => {
-            connection
-                .open()
-                .then(() => {
-                    connection.Db.collection(collection)
-                        .then(todos => {
-                            resolve(todos);
-                            connection.close();
-                        })
-                        .catch(error => {
-                            reject(error);
-                            connection.close();
-                        });
+            todo
+                .find()
+                .then(res => {
+                    resolve(res);
                 })
                 .catch(error => {
                     reject(error);
-                    connection.close();
                 });
         });
     }
