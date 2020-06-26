@@ -1,20 +1,24 @@
 const mongoose = require('mongoose');
-// const Koa = require('koa')
-// const app = new Koa()
 
 class DbConnection {
-    constructor(collectionName) {
-        this.Uri = collectionName;
+    constructor(schema, collectionName) {
+        this.Uri = 'mongodb://127.0.0.1:27017/' + collectionName;
+        this.schema = schema;
     }
 
     open() {    //连接Mongodb
-        mongoose.connect(this.Uri, { useNewUrlParser: true })
+        todo = mongoose.model('item', schema, collectionName);
+        mongoose.connect(   //连接mongodb
+            this.Uri,
+            {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            });
 
         return new Promise((resolve, reject) => {
             mongoose.connect(this.Uri)
                 .then(db => {
                     console.log(db);
-
                     this.Db = db;
                     resolve();
                 })
@@ -26,9 +30,7 @@ class DbConnection {
     }
 
     close() {   //关闭连接
-        if (this.Db) {
-            this.Db.close().catch(error => console.log(error));
-        }
+        mongoose.disconnect().catch(error => console.log(error));
     }
 }
 

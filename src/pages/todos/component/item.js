@@ -7,11 +7,10 @@ import moment from 'moment';
 import { actions } from '../../../store/todos/index'
 import Modal from '../../../components/modal/index'
 import '../index.css';
-// import PickerButton from 'antd/lib/date-picker/PickerButton';
 
 const { TextArea } = Input;
-const dateFormat = 'YYYY/MM/DD';
-const format = 'HH:mm';
+const dateFormat = 'YYYY/MM/DD';    //日期格式
+const format = 'HH:mm'; //时间格式
 
 /**
  * 单个任务组件
@@ -74,6 +73,9 @@ class Item extends React.Component {
         });
     };
 
+    /**
+     * 点击对话框的叉叉或者取消按钮，隐藏对话框
+     */
     handleCancel = e => {
         console.log(e);
         this.setState({
@@ -95,7 +97,7 @@ class Item extends React.Component {
         console.log('afterClose');
     }
 
-    closeIcon = (<span className='modal__close__x'></span>)
+    closeIcon = (<span className='modal__close__x'></span>) //对话框的关闭按钮
 
     render() {
         const { id, text, endDate, endTime, isFinished, onToggle, onDelete } = this.props;
@@ -158,15 +160,13 @@ class Item extends React.Component {
  * 使用PropTypes进行类型检查
  */
 Item.propTypes = {
-    id: PropTypes.number.isRequired,    //每个任务的id
+    id: PropTypes.string.isRequired,    //每个任务的id
     text: PropTypes.string.isRequired,  //任务的内容
     onToggle: PropTypes.func.isRequired,    //扭转任务的函数
     onDelete: PropTypes.func.isRequired,    //删除任务的函数
     onModify: PropTypes.func.isRequired,    //修改任务的函数
     isFinished: PropTypes.bool.isRequired,    //任务的完成状态
 }
-
-
 
 /**
  * 将需要绑定的响应事件注入到组件上（props上）

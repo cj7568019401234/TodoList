@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 
 const todoSchema = new mongoose.Schema({    //声明数据类型
-    id: Number,
     text: String,
     endTime: String,
     endDate: String,
@@ -30,6 +29,55 @@ const filters = {
 };
 
 class TodoDB {
+    /**
+    * 查找所有TodoList
+    */
+    findTodos() {
+        return new Promise((resolve, reject) => {
+            todo
+                .find()
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    }
+
+    /**
+    * 更新todo
+    * @param {id} 需要修改的todo的id 
+    * @param {item} 需要修改的todo对象
+    */
+    updateTodo(id, item) {
+        return new Promise((resolve, reject) => {
+            todo
+                .update(
+                    filters.id(id),
+                    {
+                        $set: {
+                            text: item.text,
+                            isFinished: item.isFinished,
+                            endTime: item.endTime,
+                            endDate: item.endDate
+                        }
+                    })
+                .then(() => {
+                    resolve();
+                    // connection.close();
+                })
+                .catch(error => {
+                    reject(error);
+                    // connection.close();
+                });
+        })
+            .catch(error => {
+                resolve(error);
+                // connection.close();
+            });
+    }
+
     addTodo(note) {
         const connection = connect();
 
@@ -94,57 +142,7 @@ class TodoDB {
                 });
         });
     }
-
-    updateTodo(id, note) {
-        const connection = connect();
-
-        return new Promise((resolve, reject) => {
-            connection
-                .open()
-                .then(() => {
-                    connection.Db
-                        .collection(collection)
-                        .update(
-                            filters.id(id),
-                            {
-                                $set: {
-                                    title: note.title,
-                                    content: note.content,
-                                    tags: note.tags,
-                                    updated_date: note.updated_date
-                                }
-                            })
-                        .then(() => {
-                            resolve();
-                            connection.close();
-                        })
-                        .catch(error => {
-                            reject(error);
-                            connection.close();
-                        });
-                })
-                .catch(error => {
-                    resolve(error);
-                    connection.close();
-                });
-        });
-    }
-
-    /**
-     * 查找所有TodoList
-     */
-    findTodos() {
-        return new Promise((resolve, reject) => {
-            todo
-                .find()
-                .then(res => {
-                    resolve(res);
-                })
-                .catch(error => {
-                    reject(error);
-                });
-        });
-    }
 }
 
+// mongoose.disconnect();
 module.exports = TodoDB;

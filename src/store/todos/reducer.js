@@ -1,12 +1,9 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO } from './actionTypes'
-// const express = require('express');
-// const Todo = require('./db');
-// const router = express.Router();
-
+const TodoService = require('../../services/todoServer');
 
 export default (state = [], action) => {
     switch (action.type) {
-        case ADD_TODO: {    //新增任务
+        case ADD_TODO: { //新增任务
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: [
@@ -44,6 +41,8 @@ export default (state = [], action) => {
 
         }
         case MODIFY_TODO: { //修改任务
+            TodoService.default.updateTodo(action);
+
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: state.todoList.map((item) => {

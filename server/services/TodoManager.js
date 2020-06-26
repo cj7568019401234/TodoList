@@ -29,42 +29,6 @@ class TodoManager {
                 .catch(error => reject(error));
         });
     }
-
-    findNoteById(id) {
-
-        assert(id, 'Id is required');
-
-        return new Promise((resolve, reject) => {
-            todoRepository
-                .findNoteById(id)
-                .then(note => resolve(mapToNoteDto(note)))
-                .catch(error => reject(error));
-        });
-    }
-
-    findNotesByTag(tag) {
-
-        assert(tag, 'Tag is required');
-
-        return new Promise((resolve, reject) => {
-            todoRepository
-                .findNotesByTag(tag)
-                .then(notes => resolve(notes.map(note => mapToNoteDto(note))))
-                .catch(error => reject(error));
-        });
-    }
-
-    findNotesByTitle(title) {
-
-        assert(title, 'Title is required');
-
-        return new Promise((resolve, reject) => {
-            todoRepository
-                .findNotesByTitle(title)
-                .then(notes => resolve(notes.map(note => mapToNoteDto(note))))
-                .catch(error => reject(error));
-        });
-    }
     
     removeNote(id) {
         assert(id, 'Id is required');
@@ -76,25 +40,7 @@ class TodoManager {
                 .catch(error => reject(error));
         });
     }
-
-    tagNote(id, tags) {
-
-        assert(id, 'Id is required');
-        assert(tags, 'Tags are required');
-
-        var exp = new RegExp(/^([\w]+[,]?)*$/);
-        assert(exp.test(tags), 'Invalid list of tags specified');
-
-        const uniqueTags = tags ? Array.from(new Set(tags.split(',').map(tag => tag.toLowerCase()))) : [];
-
-        return new Promise((resolve, reject) => {
-            todoRepository
-                .tagNote(id, uniqueTags)
-                .then(() => resolve())
-                .catch(error => reject(error));
-        });
-    }
-
+    
     updateNote(id, title, content, tags) {
         assert(id, 'Id is required');
         assert(title, 'Title is required');

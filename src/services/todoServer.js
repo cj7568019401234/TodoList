@@ -1,22 +1,54 @@
 import * as axios from 'axios';
 
+const baseApiUrl = ''; //mongodb
 
-// db options
-
-
-const baseApiUrl = 'http://localhost:8000/api';
-
-
-// add note
-
-const addNote = (title, content, tags = []) => {
-
+/**
+ * 查找所有待办事项
+ */
+const findTodo = () => {
     return new Promise((resolve, reject) => {
         axios
-            .post(`${baseApiUrl}/notes`, { 
+            .get(`${baseApiUrl}/todo`)
+            .then(response => {
+                resolve(response.data);
+                return;
+            })
+            .catch(error => {
+                reject(error.message);
+                return;
+            });
+    });
+};
+
+/**
+ * 更新待办事项
+ * @param {todo} 需要更新的todo对象
+ */
+const updateTodo = (todo) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`${baseApiUrl}/todo/update`, { todo })
+            .then(() => {
+                resolve();
+                return;
+            })
+            .catch(error => {
+                reject(error.message);
+                return;
+            });
+    });
+
+};
+
+// add todo
+const addTodo = (title, content, tags = []) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`${baseApiUrl}/todos`, {
                 'title': title,
                 'content': content,
-                'tags': tags.join() })
+                'tags': tags.join()
+            })
             .then((result) => {
                 resolve(result.data);
             })
@@ -29,70 +61,11 @@ const addNote = (title, content, tags = []) => {
 
 };
 
-// find notes
-
-
-const findNote = (id) => {
-    
+// remove todo
+const removeTodo = (id) => {
     return new Promise((resolve, reject) => {
         axios
-            .get(`${baseApiUrl}/notes/${id}`)
-            .then(response => {
-                resolve(response.data);
-                return;
-            })
-            .catch(error => {
-                reject(error.message);
-                return;
-            });
-    });
-    
-};
-
-
-const findNotesByTitle = (title) => {
-
-    return new Promise((resolve, reject) => {
-        axios
-            .get(`${baseApiUrl}/notes?title=${title}`)
-            .then(response => {
-                resolve(response.data);
-                return;
-            })
-            .catch(error => {
-                reject(error.message);
-                return;
-            });
-    });
-
-};
-
-const listTodos = () => {
-
-    return new Promise((resolve, reject) => {
-        axios
-            .get(`${baseApiUrl}/todos`)
-            .then(response => {
-                resolve(response.data);
-                return;
-            })
-            .catch(error => {
-                reject(error.message);
-                return;
-            });
-    });
-
-};
-
-
-// remove note
-
-
-const removeNote = (id) => {
-
-    return new Promise((resolve, reject) => {
-        axios
-            .delete(`${baseApiUrl}/notes/${id}`)
+            .delete(`${baseApiUrl}/todos/${id}`)
             .then(() => {
                 resolve();
                 return;
@@ -102,36 +75,12 @@ const removeNote = (id) => {
                 return;
             });
     });
-
 };
-
-
-// update note
-
-
-const updateNote = (note) => {
-    return new Promise((resolve, reject) => {
-        axios
-            .put(`${baseApiUrl}/notes`, {note})
-            .then(() => {
-                resolve();
-                return;
-            })
-            .catch(error => {
-                reject(error.message);
-                return;
-            });
-    });
-    
-};
-
 
 // exports
-export default{
-    'addNote': addNote,
-    'findNote': findNote,
-    'findNotesByTitle': findNotesByTitle,
-    'listNotes': listNotes,
-    'removeNote': removeNote,
-    'updateNote': updateNote
+export default {
+    'findTodo': findTodo,
+    'addTodo': addTodo,
+    'removeTodo': removeTodo,
+    'updateTodo': updateTodo
 };
