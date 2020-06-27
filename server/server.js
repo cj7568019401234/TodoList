@@ -6,7 +6,7 @@ const app = new Koa();  // configure server
 
 // log request URL:
 app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
+    console.log(`Process ${ctx.request.method} ${ctx.request.url} ${ctx.header.referer}...`);
     await next();
 });
 

@@ -16,23 +16,11 @@ mongoose.connect(   //连接mongodb
         useUnifiedTopology: true
     });
 
-const filters = {
-    id: (id) => {
-        return { _id: new ObjectID(id) };
-    },
-    tag: (tag) => {
-        return { tags: { $regex: new RegExp(tag, 'i') } };
-    },
-    title: (title) => {
-        return { 'title': { $regex: new RegExp(title, 'i') } };
-    }
-};
-
 class TodoDB {
     /**
     * 查找所有TodoList
     */
-    findTodos() {
+    getTodo() {
         return new Promise((resolve, reject) => {
             todo
                 .find()
@@ -50,15 +38,14 @@ class TodoDB {
     * @param {id} 需要修改的todo的id 
     * @param {item} 需要修改的todo对象
     */
-    updateTodo(id, item) {
+    updateTodo(item) {
         return new Promise((resolve, reject) => {
             todo
-                .update(
-                    filters.id(id),
+                .updateOne(
+                    { _id: new ObjectID(item.id) },
                     {
                         $set: {
                             text: item.text,
-                            isFinished: item.isFinished,
                             endTime: item.endTime,
                             endDate: item.endDate
                         }
@@ -72,77 +59,88 @@ class TodoDB {
                     // connection.close();
                 });
         })
-            .catch(error => {
-                resolve(error);
-                // connection.close();
-            });
     }
 
-    addTodo(note) {
-        const connection = connect();
-
+    /**
+     * 添加待办事项
+     * @param {item} 待添加的todo对象 
+     */
+    addTodo(item) {
         return new Promise((resolve, reject) => {
-            connection
-                .open()
-                .then(() => {
-                    connection.Db.collection(collection)
-                        .findOne(filters.title(note.title))
-                        .then(noteData => {
-                            if (noteData) {
-                                connection.close();
-                                reject(Error('Note already exists'));
-                            } else {
-                                connection.Db
-                                    .collection(collection)
-                                    .insertOne(note)
-                                    .then(result => {
-                                        connection.close();
-                                        resolve({ id: result.insertedId });
-                                    })
-                                    .catch(error => {
-                                        connection.close();
-                                        reject(error);
-                                    });
-                            }
-                        })
-                        .catch(error => {
-                            connection.close();
-                            reject(error);
-                        });
+            todo
+                .create({
+                    text: item.text,
+                    endDate: item.endDate,
+                    isFinished: item.isFinished,
+                    endTime: item.endTime
+                })
+                .then(result => {
+                    console.log(result, result._id);
+                    resolve({ id: result._id });
                 })
                 .catch(error => {
                     reject(error);
-                    connection.close();
+                });
+        })
+    }
+
+    /**
+     * 删除待办事项
+     * @param {id} 需要删除的待办事项的id 
+     */
+    deleteTodo(id, isFinished) {
+        return new Promise((resolve, reject) => {
+            todo
+                .updateOne(
+                    { _id: new ObjectID(id) },
+                    {
+                        $set: {
+                            isFinished: isFinished
+                        }
+                    }
+                )
+                .then(() => {
+                    resolve();
+                })
+                .catch(error => {
+                    reject(error);
                 });
         });
     }
 
-    removeTodo(id) {
-        const connection = connect();
-
+    /**
+     * 扭转待办事项的状态
+     * @param {id} 需要扭转的待办事项的id 
+     */
+    toggleTodo(id) {
         return new Promise((resolve, reject) => {
-            connection
-                .open()
-                .then(() => {
-                    connection.Db
-                        .collection(collection)
-                        .findOneAndDelete(filters.id(id))
+            todo
+                .findOne({ _id: new ObjectID(id) })
+                .then((result) => {
+                    console.log(result, result.isFinished, !result.isFinished);
+                    todo.updateOne(
+                        { _id: new ObjectID(id) },
+                        {
+                            $set: {
+                                isFinished: !result.isFinished
+                            }
+                        })
                         .then(() => {
                             resolve();
-                            connection.close();
                         })
                         .catch(error => {
                             reject(error);
-                            connection.close();
                         });
+                }
+                )
+                .then(() => {
+                    resolve();
                 })
                 .catch(error => {
-                    resolve(error);
-                    connection.close();
+                    reject(error);
                 });
         });
     }
 }
 
-// mongoose.disconnect();
 module.exports = TodoDB;

@@ -5,7 +5,7 @@ const baseApiUrl = ''; //mongodb
 /**
  * 查找所有待办事项
  */
-const findTodo = () => {
+const getTodo = () => {
     return new Promise((resolve, reject) => {
         axios
             .get(`${baseApiUrl}/todo`)
@@ -40,15 +40,14 @@ const updateTodo = (todo) => {
 
 };
 
-// add todo
-const addTodo = (title, content, tags = []) => {
+/**
+ * 添加待办事项
+ * @param {todo} 需要添加的todo对象 
+ */
+const addTodo = (todo) => {
     return new Promise((resolve, reject) => {
         axios
-            .post(`${baseApiUrl}/todos`, {
-                'title': title,
-                'content': content,
-                'tags': tags.join()
-            })
+            .post(`${baseApiUrl}/todo/add`, { todo })
             .then((result) => {
                 resolve(result.data);
             })
@@ -61,11 +60,33 @@ const addTodo = (title, content, tags = []) => {
 
 };
 
-// remove todo
-const removeTodo = (id) => {
+/**
+ * 删除待办事项
+ * @param {id} 需要删除的待办事项的id 
+ */
+const deleteTodo = (id) => {
     return new Promise((resolve, reject) => {
         axios
-            .delete(`${baseApiUrl}/todos/${id}`)
+            .post(`${baseApiUrl}/todo/delete`, { id })
+            .then(() => {
+                resolve();
+                return;
+            })
+            .catch(error => {
+                reject(error.message);
+                return;
+            });
+    });
+};
+
+/**
+ * 需要删除的待办事项
+ * @param {id} 需要扭转的待办事项的id 
+ */
+const toggleTodo = (id) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`${baseApiUrl}/todo/toggle`, { id })
             .then(() => {
                 resolve();
                 return;
@@ -79,8 +100,9 @@ const removeTodo = (id) => {
 
 // exports
 export default {
-    'findTodo': findTodo,
+    'getTodo': getTodo,
     'addTodo': addTodo,
-    'removeTodo': removeTodo,
-    'updateTodo': updateTodo
+    'deleteTodo': deleteTodo,
+    'updateTodo': updateTodo,
+    'toggleTodo': toggleTodo
 };

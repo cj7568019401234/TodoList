@@ -1,17 +1,22 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO } from './actionTypes.js';
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO, INIT_TODO } from './actionTypes.js';
 
-let nextTaskId = 0;
+/**
+ * 从服务器获取任务
+ */
+export const initTodo = () => ({
+    type: INIT_TODO
+})
 
 /**
  * 添加新任务
  * @param {text} 新增任务的文案 
  */
-export const addTodo = (text, endDate, endTime) => ({
+export const addTodo = (text, isFinished, endDate, endTime) => ({
     type: ADD_TODO,
-    id: nextTaskId++,
     text: text,
-    endDate:endDate,
-    endTime:endTime
+    isFinished: isFinished,
+    endDate: endDate,
+    endTime: endTime
 })
 
 /**
@@ -39,8 +44,8 @@ export const deleteTodo = (id) => ({
  * @param {endDate} 任务结日期
  * @param {endTime} 任务结束时间
  */
-export const modifyTodo = (id ,text, endDate, endTime) => ({
-    type : MODIFY_TODO,
+export const modifyTodo = (id, text, endDate, endTime) => ({
+    type: MODIFY_TODO,
     id: id,
     text: text,
     endDate: endDate,

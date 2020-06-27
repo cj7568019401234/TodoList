@@ -6,51 +6,69 @@ class TodoManager {
     /**
     * 查询所有的待办事项
     */
-    listTodos() {
+    getTodo() {
         return new Promise((resolve, reject) => {
             todoRepository
-                .findTodos()
+                .getTodo()
                 .then(todoList => resolve(todoList))
                 .catch(error => reject(error));
         });
     }
 
-    addNote(title, content, tags) {
-
-        assert(title, 'Title is required');
-        assert(content, 'Content is required');
-
-        const note = createNewNote(title, content, tags);
-
+    /**
+     * 更新待办事项
+     * @param {item} 需要更新的todo对象 
+     */
+    updateTodo(item) {
+        assert(item, 'item is required');
         return new Promise((resolve, reject) => {
             todoRepository
-                .addNote(note)
-                .then(result => resolve(result.id))
-                .catch(error => reject(error));
-        });
-    }
-    
-    removeNote(id) {
-        assert(id, 'Id is required');
-
-        return new Promise((resolve, reject) => {
-            todoRepository
-                .removeNote(id)
+                .updateTodo(item)
                 .then(() => resolve())
                 .catch(error => reject(error));
         });
     }
-    
-    updateNote(id, title, content, tags) {
-        assert(id, 'Id is required');
-        assert(title, 'Title is required');
-        assert(content, 'Content is required');
 
-        const note = createUpdatedNote(title, content, tags);
+    /**
+     * 添加待办事项
+     * @param {item} 需要添加的todo对象 
+     * @return {result} 返回插入成功之后的对象的_id
+     */
+    addTodo(item) {
+        assert(item, 'item is required');
+        return new Promise((resolve, reject) => {
+            todoRepository
+                .addTodo(item)
+                .then(result => resolve(result))
+                .catch(error => reject(error));
+        });
+    }
+
+    /**
+     * 删除待办事项
+     * @param {id} 需要删除的待办事项的id 
+     */
+    deleteTodo(id) {
+        assert(id, 'Id is required');
 
         return new Promise((resolve, reject) => {
             todoRepository
-                .updateNote(id, note)
+                .deleteTodo(id)
+                .then(() => resolve())
+                .catch(error => reject(error));
+        });
+    }
+
+    /**
+     * 扭转待办事项的状态
+     * @param {id} 需要扭转的待办事项的id 
+     */
+    toggleTodo(id) {
+        assert(id, 'Id is required');
+
+        return new Promise((resolve, reject) => {
+            todoRepository
+                .toggleTodo(id)
                 .then(() => resolve())
                 .catch(error => reject(error));
         });

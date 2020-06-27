@@ -48,7 +48,6 @@ class Item extends React.Component {
     *  @param {dateString} 格式化后的被选择日期
     */
     handleDatePicker = (value, dateString) => {
-        console.log(dateString);
         this.setState({ endDate: dateString })
     }
 
@@ -58,7 +57,6 @@ class Item extends React.Component {
     *  @param {timeString} 格式化后的被选择时间
     */
     handleTimePicker = (time, timeString) => {
-        console.log(timeString);
         this.setState({ endTime: timeString });
     };
 
@@ -83,20 +81,6 @@ class Item extends React.Component {
         });
     };
 
-    maskStyle = {
-        backgroundColor: 'pink',
-        opacity: 0.6,
-        zIndex: 1000,
-    }
-
-    bodyStyle = {
-        backgroundColor:'pink',
-    }
-
-    afterClose = () =>{
-        console.log('afterClose');
-    }
-
     closeIcon = (<span className='modal__close__x'></span>) //对话框的关闭按钮
 
     render() {
@@ -112,18 +96,6 @@ class Item extends React.Component {
                     visible={this.state.visible}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    // width={600}
-                    // mask={true}
-                    // maskStyle={this.maskStyle}
-                    // zIndex={2000}
-                    // closable={true}
-                    // centered={true}
-                    // okType={'not'}
-                    // bodyStyle={this.bodyStyle}
-                    // style={this.bodyStyle}
-                    // afterClose={this.afterClose}
-                    // maskClosable={true}
-                    // closeIcon={this.closeIcon}
                 >
                     <TextArea rows={4}
                         placeholder="请输入任务"

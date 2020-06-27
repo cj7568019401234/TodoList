@@ -1,15 +1,18 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO } from './actionTypes'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO, INIT_TODO } from './actionTypes'
 const TodoService = require('../../services/todoServer');
 
 export default (state = [], action) => {
     switch (action.type) {
-        case ADD_TODO: { //新增任务
+        case ADD_TODO: (async () => { //新增任务
+            //向服务器发起添加任务的请求，返回值为插入之后的数据的_id
+            const resultId = await TodoService.default.addTodo(action);
+
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: [
                     ...state.todoList,
                     {
-                        id: action.id,
+                        id: resultId,
                         text: action.text,
                         isFinished: false, //新增任务的初始状态为未完成
                         endTime: action.endTime,
@@ -17,8 +20,10 @@ export default (state = [], action) => {
                     }   //新增的数据放在下面，增加任务时时页面变动小一点
                 ]
             }
-        }
+        })();
         case TOGGLE_TODO: { //扭转任务状态
+            TodoService.default.toggleTodo(action.id);  //向服务器发起请求，扭转任务状态
+            
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: state.todoList.map((item) => {
@@ -32,17 +37,17 @@ export default (state = [], action) => {
                     }
                 })
             }
-        }
+        };
         case DELETE_TODO: { //删除任务
+            TodoService.default.deleteTodo(action.id);  //向服务器发起删除请求
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: state.todoList.filter((item) => item.id !== action.id)  //直接去掉当前任务
             }
+        };
 
-        }
         case MODIFY_TODO: { //修改任务
-            TodoService.default.updateTodo(action);
-
+            TodoService.default.updateTodo(action); //向服务器发起update请求
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: state.todoList.map((item) => {
@@ -58,7 +63,16 @@ export default (state = [], action) => {
                     }
                 })
             }
-        }
+        };
+
+        case INIT_TODO: (async () => { //查询任务
+            let result = await TodoService.default.getTodo(); //向服务器发起查询请求
+            return {
+                ...state,   //state的其他数据原样返回
+                todoList: result
+            }
+        })();
+
         default: {
             return state;
         }

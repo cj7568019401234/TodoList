@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Collapse, Statistic, Empty } from 'antd';
 import { SmileOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { actions } from '../../../store/todos/index';
 import Item from './item.js';
 import '../index.css';
 const TodoService = require('../../../services/todoServer');
@@ -13,7 +14,7 @@ const { Panel } = Collapse;
  * @param {unfinishedList} 未完成任务列表
  * @param {finishedList} 已完成任务列表 
  */
-const TodoList = ({ unfinishedList, finishedList }) => {
+const TodoList = ({ unfinishedList, finishedList, onInit }) => {
     const [todoList, setTodoList] = useState(unfinishedList);
     const [doneList, setDoneList] = useState(finishedList);
 
@@ -21,10 +22,12 @@ const TodoList = ({ unfinishedList, finishedList }) => {
      * 渲染完之后去服务器获取数据
      */
     useEffect(() => {
-        (async function() {
-            let result = await TodoService.default.findTodo();  //向服务器请求todo数据
+        (async function () {
+            let result = await TodoService.default.getTodo();  //向服务器请求todo数据
+            if (result.length > 0) onInit();//state更新成服务器的数据
             setTodoList(result.filter(item => !item.isFinished));//过滤出已完成的任务
             setDoneList(result.filter(item => item.isFinished));//过滤出未完成的任务
+
             console.log('fetchData');
         })();
     }, [unfinishedList, finishedList]);//只有在数据改变了才去请求，否则会一直去请求
@@ -89,7 +92,8 @@ const TodoList = ({ unfinishedList, finishedList }) => {
  */
 TodoList.propTypes = {
     finishedList: PropTypes.array.isRequired,
-    unfinishedList: PropTypes.array.isRequired
+    unfinishedList: PropTypes.array.isRequired,
+    onInit: PropTypes.func.isRequired  //指定初始化函数被传递给组件
 }
 
 /**
@@ -99,8 +103,20 @@ TodoList.propTypes = {
 const mapStateToProps = (state) => {
     return {
         finishedList: state.todoList.filter(item => item.isFinished),  //过滤出已完成的任务
-        unfinishedList: state.todoList.filter(item => !item.isFinished)  //过滤出未完成的任务
+        unfinishedList: state.todoList.filter(item => !item.isFinished),  //过滤出未完成的任务
     }
 }
 
-export default connect(mapStateToProps)(TodoList); //将store和组件联系在一起
+/**
+ * 将需要绑定的响应事件注入到组件上（props上）
+ * @param {dispatch}  dispatch() 方法
+ */
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onInit: () => {    //将addTodo这个action 作为 props 绑定到组件中
+            dispatch(actions.initTodo())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList); //将store和组件联系在一起

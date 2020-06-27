@@ -52,7 +52,7 @@ class AddTodo extends React.Component {
     addTask = () => {
         const { value, endDate, endTime } = this.state
         if (!value.trim()) return; //不允许添加空白任务
-        this.props.onAdd(value, endDate, endTime);  //发出添加任务的action
+        this.props.onAdd(value, false, endDate, endTime);  //发出添加任务的action
         this.setState({ //添加任务后，输入框清空
             value: '',
             endDate: '',
@@ -61,7 +61,7 @@ class AddTodo extends React.Component {
     };
 
     render() {
-        const { value} = this.state;
+        const { value } = this.state;
         return (
             <Layout>
                 <Header className='nav'>
@@ -107,8 +107,8 @@ AddTodo.propTypes = {
  */
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAdd: (text, endDate, endTime) => {    //将addTodo这个action 作为 props 绑定到组件中
-            dispatch(actions.addTodo(text, endDate, endTime))
+        onAdd: (text, isFinished, endDate, endTime) => {    //将addTodo这个action 作为 props 绑定到组件中
+            dispatch(actions.addTodo(text, isFinished, endDate, endTime))
         }
     }
 }
