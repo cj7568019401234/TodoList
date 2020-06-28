@@ -75,7 +75,7 @@ class TodoDB {
                     endTime: item.endTime
                 })
                 .then(result => {
-                    console.log(result, result._id);
+                    console.log(result);
                     resolve({ id: result._id });
                 })
                 .catch(error => {
@@ -89,16 +89,10 @@ class TodoDB {
      * @param {id} 需要删除的待办事项的id 
      */
     deleteTodo(id, isFinished) {
+
         return new Promise((resolve, reject) => {
             todo
-                .updateOne(
-                    { _id: new ObjectID(id) },
-                    {
-                        $set: {
-                            isFinished: isFinished
-                        }
-                    }
-                )
+                .deleteOne({ _id: new ObjectID(id) })
                 .then(() => {
                     resolve();
                 })
@@ -117,7 +111,6 @@ class TodoDB {
             todo
                 .findOne({ _id: new ObjectID(id) })
                 .then((result) => {
-                    console.log(result, result.isFinished, !result.isFinished);
                     todo.updateOne(
                         { _id: new ObjectID(id) },
                         {

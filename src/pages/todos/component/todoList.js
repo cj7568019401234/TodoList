@@ -68,8 +68,8 @@ const TodoList = ({ unfinishedList, finishedList, onInit }) => {
                         {doneList.length ? (
                             doneList.map((item) => (
                                 <Item
-                                    key={item.id}
-                                    id={item.id}
+                                    key={item._id}
+                                    id={item._id}
                                     text={item.text}
                                     isFinished={item.isFinished}
                                     endDate={item.endDate}

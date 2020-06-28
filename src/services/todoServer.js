@@ -45,6 +45,7 @@ const updateTodo = (todo) => {
  * @param {todo} 需要添加的todo对象 
  */
 const addTodo = (todo) => {
+    console.log('addTodo',todo);
     return new Promise((resolve, reject) => {
         axios
             .post(`${baseApiUrl}/todo/add`, { todo })
@@ -55,9 +56,7 @@ const addTodo = (todo) => {
                 console.log(error);
                 reject(error.message);
             });
-
     });
-
 };
 
 /**
