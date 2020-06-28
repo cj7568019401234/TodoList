@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Collapse, Statistic, Empty } from 'antd';
@@ -15,8 +15,8 @@ const { Panel } = Collapse;
  * @param {finishedList} 已完成任务列表 
  */
 const TodoList = ({ unfinishedList, finishedList, onInit }) => {
-    const [todoList, setTodoList] = useState(unfinishedList);
-    const [doneList, setDoneList] = useState(finishedList);
+    // const [todoList, setTodoList] = useState(unfinishedList);
+    // const [doneList, setDoneList] = useState(finishedList);
 
     /**
      * 渲染完之后去服务器获取数据
@@ -25,12 +25,11 @@ const TodoList = ({ unfinishedList, finishedList, onInit }) => {
         (async function () {
             let result = await TodoService.default.getTodo();  //向服务器请求todo数据
             if (result.length > 0) onInit();//state更新成服务器的数据
-            setTodoList(result.filter(item => !item.isFinished));//过滤出已完成的任务
-            setDoneList(result.filter(item => item.isFinished));//过滤出未完成的任务
-
+            // setTodoList(result.filter(item => !item.isFinished));//过滤出已完成的任务
+            // setDoneList(result.filter(item => item.isFinished));//过滤出未完成的任务
             console.log('fetchData');
         })();
-    }, [unfinishedList, finishedList]);//只有在数据改变了才去请求，否则会一直去请求
+    }, []);//只请求一次
 
     /**
      * @param {type} 任务类型，unfinished为待完成，finished为已完成
@@ -38,9 +37,9 @@ const TodoList = ({ unfinishedList, finishedList, onInit }) => {
      */
     const genExtra = (type) => (
         type === 'unfinished' ?
-            <Statistic value={todoList.length} prefix={<SmileOutlined />} />
+            <Statistic value={unfinishedList.length} prefix={<SmileOutlined />} />
             :
-            <Statistic value={doneList.length} prefix={<CheckCircleOutlined />} />
+            <Statistic value={finishedList.length} prefix={<CheckCircleOutlined />} />
     )
 
     return (
@@ -48,8 +47,8 @@ const TodoList = ({ unfinishedList, finishedList, onInit }) => {
             <div className='task-container'>
                 <Collapse defaultActiveKey={['1', '2']} >
                     <Panel className='task task--todo' header="待完成" key="1" extra={genExtra('unfinished')}>
-                        {todoList.length ? (
-                            todoList.map((item) => (
+                        {unfinishedList.length ? (
+                            unfinishedList.map((item) => (
                                 <Item
                                     key={item._id}
                                     id={item._id}
@@ -65,8 +64,8 @@ const TodoList = ({ unfinishedList, finishedList, onInit }) => {
                         }
                     </Panel>
                     <Panel className='task task--done' header="已完成" key="2" extra={genExtra('finished')}>
-                        {doneList.length ? (
-                            doneList.map((item) => (
+                        {finishedList.length ? (
+                            finishedList.map((item) => (
                                 <Item
                                     key={item._id}
                                     id={item._id}
@@ -101,6 +100,7 @@ TodoList.propTypes = {
  * @param {state} store中维护的state
  */
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         finishedList: state.todoList.filter(item => item.isFinished),  //过滤出已完成的任务
         unfinishedList: state.todoList.filter(item => !item.isFinished),  //过滤出未完成的任务

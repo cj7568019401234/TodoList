@@ -1,19 +1,18 @@
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO, INIT_TODO } from './actionTypes'
 const TodoService = require('../../services/todoServer');
 
-export default (state = [], action) => {
+export  default async (state = [], action) => {
     console.log(action);
-    switch (action.type) {
-        case ADD_TODO: (async () => { //新增任务
-            //向服务器发起添加任务的请求，返回值为插入之后的数据的_id
-            const resultId = await TodoService.default.addTodo(action);
 
+    switch (action.type) {
+        case ADD_TODO: {
             return {
                 ...state,   //state的其他数据原样返回
                 todoList: [
                     ...state.todoList,
                     {
-                        id: resultId,
+                        //向服务器发起添加任务的请求，返回值为插入之后的数据的_id
+                        id: await TodoService.default.addTodo(action),
                         text: action.text,
                         isFinished: false, //新增任务的初始状态为未完成
                         endTime: action.endTime,
@@ -21,25 +20,23 @@ export default (state = [], action) => {
                     }   //新增的数据放在下面，增加任务时时页面变动小一点
                 ]
             }
-        })();
-        case TOGGLE_TODO: {
-            (async () => { //扭转任务状态
-                await TodoService.default.toggleTodo(action.id);  //向服务器发起请求，扭转任务状态
-
-                return {
-                    ...state,   //state的其他数据原样返回
-                    todoList: state.todoList.map((item) => {
-                        if (item.id === action.id) {
-                            return {
-                                ...item,
-                                isFinished: !item.isFinished,   //扭转状态
-                            }
-                        } else {
-                            return item;
+        };
+        case TOGGLE_TODO: {//扭转任务状态
+            TodoService.default.toggleTodo(action.id);  //向服务器发起请求，扭转任务状态
+            return {
+                ...state,   //state的其他数据原样返回
+                todoList: state.todoList.map((item) => {
+                    if (item.id === action.id) {
+                        console.log(item)
+                        return {
+                            ...item,
+                            isFinished: !item.isFinished,   //扭转状态
                         }
-                    })
-                }
-            })();
+                    } else {
+                        return item;
+                    }
+                }),
+            }
         };
         case MODIFY_TODO: { //修改任务
             TodoService.default.updateTodo(action); //向服务器发起update请求
@@ -66,16 +63,14 @@ export default (state = [], action) => {
                 todoList: state.todoList.filter((item) => item.id !== action.id)  //直接去掉当前任务
             }
         };
-        case INIT_TODO: {
-            (async () => { //查询任务
-                return {
-                    ...state,   //state的其他数据原样返回
-                    todoList: await TodoService.default.getTodo() //向服务器发起查询请求
-                }
-            })();
-        }
+        case INIT_TODO: {//查询任务
+            return {
+                ...state,   //state的其他数据原样返回
+                todoList: await TodoService.default.getTodo() //向服务器发起查询请求
+            }
+        };
         default: {
             return state;
-        }
+        };
     }
 }
