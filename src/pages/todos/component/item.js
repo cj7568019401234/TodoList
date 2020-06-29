@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Divider, Checkbox, Input, DatePicker, TimePicker} from 'antd';
+import { Divider, Checkbox, Input, DatePicker, TimePicker } from 'antd';
 import { DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { actions } from '../../../store/todos/index'
 import Modal from '../../../components/modal/index'
 import '../index.css';
-
+import { resolveOnChange } from 'antd/lib/input/Input';
+const TodoService = require('../../../services/todoServer');
 const { TextArea } = Input;
 const dateFormat = 'YYYY/MM/DD';    //日期格式
 const format = 'HH:mm'; //时间格式
@@ -148,8 +149,21 @@ Item.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps; //id用props的就行，id没变化
     return {
-        onToggle: () => dispatch(actions.toggleTodo(id)),
-        onDelete: () => dispatch(actions.deleteTodo(id)),
+        onToggle: () => {
+            TodoService.default.toggleTodo(id)
+                .then(() => {
+                    TodoService.default.getTodo()
+                        .then((todoList) => {
+                            dispatch(actions.initTodo(todoList))
+                        })
+                })
+        },
+        onDelete: () => {
+            TodoService.default.deleteTodo(id)
+                .then((todoList) => {
+                    dispatch(actions.initTodo(todoList))
+                })
+        },
         onModify: (text, endDate, endTime) => dispatch(actions.modifyTodo(id, text, endDate, endTime))
         //text, endDate, endTime需要传本地的
     }

@@ -3,9 +3,9 @@ import { createStore } from 'redux';
 
 const initState = {
     todoList: []
-}
+};
 
-export default createStore(reducer, initState)
+export default createStore(reducer, initState);
 
 
 

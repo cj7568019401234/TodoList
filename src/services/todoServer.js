@@ -86,8 +86,9 @@ const toggleTodo = (id) => {
     return new Promise((resolve, reject) => {
         axios
             .post(`${baseApiUrl}/todo/toggle`, { id })
-            .then(() => {
-                resolve();
+            .then((res) => {
+                console.log(res)
+                resolve(res);
                 return;
             })
             .catch(error => {

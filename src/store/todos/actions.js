@@ -3,8 +3,9 @@ import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, MODIFY_TODO, INIT_TODO } from './ac
 /**
  * 从服务器获取任务
  */
-export const initTodo = () => ({
-    type: INIT_TODO
+export const initTodo = (todoList) => ({
+    type: INIT_TODO,
+    todoList: todoList
 })
 
 /**

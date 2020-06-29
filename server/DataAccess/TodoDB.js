@@ -51,12 +51,13 @@ class TodoDB {
                         }
                     })
                 .then(() => {
-                    resolve();
-                    // connection.close();
+                    todo.find()
+                })
+                .then(res => {
+                    resolve(res);
                 })
                 .catch(error => {
                     reject(error);
-                    // connection.close();
                 });
         })
     }
@@ -74,9 +75,9 @@ class TodoDB {
                     isFinished: item.isFinished,
                     endTime: item.endTime
                 })
-                .then(result => {
-                    console.log(result);
-                    resolve({ id: result._id });
+                .find()
+                .then(res => {
+                    resolve(res);
                 })
                 .catch(error => {
                     reject(error);
@@ -93,8 +94,9 @@ class TodoDB {
         return new Promise((resolve, reject) => {
             todo
                 .deleteOne({ _id: new ObjectID(id) })
-                .then(() => {
-                    resolve();
+                .find()
+                .then(res => {
+                    resolve(res);
                 })
                 .catch(error => {
                     reject(error);
@@ -121,13 +123,6 @@ class TodoDB {
                         .then(() => {
                             resolve();
                         })
-                        .catch(error => {
-                            reject(error);
-                        });
-                }
-                )
-                .then(() => {
-                    resolve();
                 })
                 .catch(error => {
                     reject(error);

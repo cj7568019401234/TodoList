@@ -15,20 +15,15 @@ const { Panel } = Collapse;
  * @param {finishedList} 已完成任务列表 
  */
 const TodoList = ({ unfinishedList, finishedList, onInit }) => {
-    // const [todoList, setTodoList] = useState(unfinishedList);
-    // const [doneList, setDoneList] = useState(finishedList);
-
     /**
      * 渲染完之后去服务器获取数据
      */
     useEffect(() => {
-        (async function () {
-            let result = await TodoService.default.getTodo();  //向服务器请求todo数据
-            if (result.length > 0) onInit();//state更新成服务器的数据
-            // setTodoList(result.filter(item => !item.isFinished));//过滤出已完成的任务
-            // setDoneList(result.filter(item => item.isFinished));//过滤出未完成的任务
-            console.log('fetchData');
-        })();
+        TodoService.default.getTodo()  //向服务器请求todo数据
+            .then((result) => {
+                onInit(result);//state更新成服务器的数据
+            })
+        console.log('fetchData');
     }, []);//只请求一次
 
     /**
@@ -100,7 +95,6 @@ TodoList.propTypes = {
  * @param {state} store中维护的state
  */
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         finishedList: state.todoList.filter(item => item.isFinished),  //过滤出已完成的任务
         unfinishedList: state.todoList.filter(item => !item.isFinished),  //过滤出未完成的任务
@@ -113,8 +107,8 @@ const mapStateToProps = (state) => {
  */
 const mapDispatchToProps = (dispatch) => {
     return {
-        onInit: () => {    //将addTodo这个action 作为 props 绑定到组件中
-            dispatch(actions.initTodo())
+        onInit: (todoList) => {    //将addTodo这个action 作为 props 绑定到组件中
+            dispatch(actions.initTodo(todoList))
         }
     }
 }
