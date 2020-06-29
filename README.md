@@ -50,5 +50,5 @@
 #### `第九版`
 分支：TodoList-v9<br>
 使用：HTML+CSS+Sass+React+Redux+Antd+Hook+Router+**Node.js**+**MongoDB**<br>
-改动：初次使用Node.js,数据存储在MongoDB中<br>
+改动：初次使用Node.js，数据存储在MongoDB中<br>
 功能：数据存在MongoDB中
