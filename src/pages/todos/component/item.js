@@ -7,7 +7,6 @@ import moment from 'moment';
 import { actions } from '../../../store/todos/index'
 import Modal from '../../../components/modal/index'
 import '../index.css';
-import { resolveOnChange } from 'antd/lib/input/Input';
 const TodoService = require('../../../services/todoServer');
 const { TextArea } = Input;
 const dateFormat = 'YYYY/MM/DD';    //日期格式
@@ -149,24 +148,34 @@ Item.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps; //id用props的就行，id没变化
     return {
-        onToggle: () => {
-            TodoService.default.toggleTodo(id)
+        onToggle: () => {   //扭转任务状态
+            TodoService.default.toggleTodo(id)  //向服务器发出扭转请求
                 .then(() => {
-                    TodoService.default.getTodo()
+                    TodoService.default.getTodo()   //更新数据为服务器最新数据
                         .then((todoList) => {
                             dispatch(actions.initTodo(todoList))
                         })
                 })
         },
-        onDelete: () => {
-            TodoService.default.deleteTodo(id)
-                .then((todoList) => {
-                    dispatch(actions.initTodo(todoList))
+        onDelete: () => {   //删除任务
+            TodoService.default.deleteTodo(id)  //向服务器发出删除请求
+                .then(() => {
+                    TodoService.default.getTodo()   //更新数据为服务器最新数据
+                        .then((todoList) => {
+                            dispatch(actions.initTodo(todoList))
+                        })
                 })
         },
-        onModify: (text, endDate, endTime) => dispatch(actions.modifyTodo(id, text, endDate, endTime))
-        //text, endDate, endTime需要传本地的
+        onModify: (text, endDate, endTime) => { //修改任务，text、endDate、endTime需要传本地的
+            TodoService.default.updateTodo({ id: id, text: text, endDate: endDate, endTime: endTime })
+                .then(() => {
+                    TodoService.default.getTodo()   //更新数据为服务器最新数据
+                        .then((todoList) => {
+                            dispatch(actions.initTodo(todoList))
+                        })
+                })
+        }
     }
 };
 
-export default connect(null, mapDispatchToProps)(Item)
+export default connect(null, mapDispatchToProps)(Item);

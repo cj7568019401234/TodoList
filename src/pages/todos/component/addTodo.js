@@ -5,7 +5,7 @@ import { Layout, Input, DatePicker, TimePicker } from 'antd';
 import { actions } from '../../../store/todos/index';
 import '../index.css';
 
-
+const TodoService = require('../../../services/todoServer');
 const { Header } = Layout;
 const { Search } = Input;
 const dateFormat = 'YYYY/MM/DD';
@@ -108,7 +108,15 @@ AddTodo.propTypes = {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAdd: (text, isFinished, endDate, endTime) => {    //将addTodo这个action 作为 props 绑定到组件中
-            dispatch(actions.addTodo(text, isFinished, endDate, endTime))
+
+            //向服务器发起添加待办事项的请求
+            TodoService.default.addTodo({ text: text, isFinished: isFinished, endDate: endDate, endTime: endTime })
+                .then(() => {
+                    TodoService.default.getTodo()   //更新数据为服务器中最新数据
+                        .then((todoList) => {
+                            dispatch(actions.initTodo(todoList))
+                        })
+                })
         }
     }
 }

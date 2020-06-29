@@ -50,9 +50,6 @@ class TodoDB {
                             endDate: item.endDate
                         }
                     })
-                .then(() => {
-                    todo.find()
-                })
                 .then(res => {
                     resolve(res);
                 })
@@ -75,7 +72,6 @@ class TodoDB {
                     isFinished: item.isFinished,
                     endTime: item.endTime
                 })
-                .find()
                 .then(res => {
                     resolve(res);
                 })
@@ -89,14 +85,12 @@ class TodoDB {
      * 删除待办事项
      * @param {id} 需要删除的待办事项的id 
      */
-    deleteTodo(id, isFinished) {
-
+    deleteTodo(id) {
         return new Promise((resolve, reject) => {
             todo
                 .deleteOne({ _id: new ObjectID(id) })
-                .find()
-                .then(res => {
-                    resolve(res);
+                .then(() => {
+                    resolve();
                 })
                 .catch(error => {
                     reject(error);
